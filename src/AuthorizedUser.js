@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {withRouter} from 'react-router-dom';
-import {Query, Mutation, withApollo} from 'react-apollo'
+import {Query, Mutation, withApollo} from 'react-apollo';
 import {flowRight as compose} from 'lodash';
 import {gql} from 'apollo-boost';
 import {ROOT_QUERY} from './App';
