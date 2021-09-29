@@ -3,7 +3,7 @@ import Users from './Users';
 import {BrowserRouter} from 'react-router-dom';
 import {gql} from 'apollo-boost';
 import AuthorizedUser from './AuthorizedUser';
-import {withApollo} from 'react-apollo';
+import {Subscription ,withApollo} from 'react-apollo';
 
 export const ROOT_QUERY = gql`
   query allUsers {
@@ -61,6 +61,15 @@ class App extends Component {
           <div>
             <AuthorizedUser/>
             <Users/>
+            <Subscription subscription={LISTEN_FOR_USERS}>
+              {({data, loading}) => loading ? 
+                <p>loading a new user...</p> :
+                <div>
+                  <img src={data.newUser.avatar} alt="" />
+                  <h2>{data.newUser.name}</h2>
+                </div>
+              }
+            </Subscription>
           </div>
         </BrowserRouter>
       )
