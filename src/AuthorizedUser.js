@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {useQuery, useMutation} from '@apollo/react-hooks';
+import {NetworkStatus} from '@apollo/client';
 import {useHistory} from 'react-router';
 import {ROOT_QUERY} from './App';
 import {gql} from 'graphql-tag';
@@ -20,25 +21,30 @@ const CurrentUser = ({ name, avatar, logout }) =>
         <button onClick={logout}>logout</button>
     </div>
 
-const Me = ({logout, requestCode, signingIn}) => {
-    const { loading, error, data, refetch } =
-        useQuery(ROOT_QUERY, {fetchPolicy: "cache-only"});
+const Me = ({logout, requestCode, signingIn, isLoggedIn}) => {
+    const { loading, error, data, refetch, networkStatus } =
+        useQuery(ROOT_QUERY, {fetchPolicy: "cache-and-network"});
 
-        if(loading) return <p>사용자 불러오는 중...</p>;
-        if(error) return `Error! ${error.message}`;
-        if(data.me) return <CurrentUser {...data.me} logout={logout} />
-        else return (
-            <button 
-                onClick={requestCode}
-                disabled={signingIn}>
-                Sign In with Github
-            </button>
-        )
+    useEffect(() => {
+        if(isLoggedIn) refetch();
+    }, []);
+
+    if(networkStatus === NetworkStatus.refetch) return <p>사용자 불러오는 중...</p>;
+    if(error) return `Error! ${error.message}`;
+    if(data.me) return <CurrentUser {...data.me} logout={logout} />
+    else return (
+        <button 
+            onClick={requestCode}
+            disabled={signingIn}>
+            Sign In with Github
+        </button>
+    )
 }
 
-const AuthorizedUser = (props) => {
+const AuthorizedUser = () => {
     let history = useHistory();
     const [signingIn, setSigninigIn] =  useState(false);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [mutateFunction, { data, loading, error }] =
         useMutation(
             GITHUB_AUTH_MUTATION,
@@ -48,6 +54,7 @@ const AuthorizedUser = (props) => {
                     localStorage.setItem('token', data.githubAuth.token);
                     history.replace('/');
                     setSigninigIn(false);
+                    setIsLoggedIn(true);
                 }
             }
         );
@@ -67,6 +74,7 @@ const AuthorizedUser = (props) => {
 
     const logout = () => {
         localStorage.removeItem('token');
+        setIsLoggedIn(false);
         
         // let data = this.props.client.readQuery({query: ROOT_QUERY});
         // data.me = null;
@@ -78,6 +86,7 @@ const AuthorizedUser = (props) => {
             signingIn={signingIn}
             requestCode={requestCode}
             logout={logout}
+            isLoggedIn={isLoggedIn}
         />
     )
 
