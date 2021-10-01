@@ -27,7 +27,7 @@ const Me = ({logout, requestCode, signingIn, isLoggedIn}) => {
 
     useEffect(() => {
         if(isLoggedIn) refetch();
-    }, []);
+    }, [isLoggedIn]);
 
     if(networkStatus === NetworkStatus.refetch) return <p>사용자 불러오는 중...</p>;
     if(error) return `Error! ${error.message}`;
@@ -43,7 +43,7 @@ const Me = ({logout, requestCode, signingIn, isLoggedIn}) => {
 
 const AuthorizedUser = () => {
     let history = useHistory();
-    const [signingIn, setSigninigIn] =  useState(false);
+    const [signingIn, setSigninigIn] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [mutateFunction, { data, loading, error }] =
         useMutation(
