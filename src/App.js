@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
 import Users from './Users';
 import {BrowserRouter} from 'react-router-dom';
-import {gql} from 'apollo-boost';
+import {gql} from 'graphql-tag';
 import AuthorizedUser from './AuthorizedUser';
-import {Subscription ,withApollo} from 'react-apollo';
+import {USER_INFO} from './fragments/userFragment';
 
 export const ROOT_QUERY = gql`
+  ${USER_INFO}
   query allUsers {
     totalUsers  
     totalPhotos      
@@ -16,11 +17,6 @@ export const ROOT_QUERY = gql`
       name
       url
     }
-  }
-  fragment userInfo on User {
-    githubLogin
-    name
-    avatar
   }
 `
 
@@ -36,24 +32,24 @@ const LISTEN_FOR_USERS = gql`
 
 class App extends Component {
 
-  componentDidMount() {
-    let { client } = this.props;
-    this.listenForUsers = client
-        .subscribe({ query: LISTEN_FOR_USERS })
-        .subscribe(({ data:{ newUser } }) => {
-            const data = client.readQuery({ query: ROOT_QUERY })
-            data.totalUsers += 1
-            data.allUsers = [
-                ...data.allUsers,
-                newUser
-            ]
-            client.writeQuery({ query: ROOT_QUERY, data })
-        });    
-  }
+  // componentDidMount() {
+  //   let { client } = this.props;
+  //   this.listenForUsers = client
+  //       .subscribe({ query: LISTEN_FOR_USERS })
+  //       .subscribe(({ data:{ newUser } }) => {
+  //           const data = client.readQuery({ query: ROOT_QUERY })
+  //           data.totalUsers += 1
+  //           data.allUsers = [
+  //               ...data.allUsers,
+  //               newUser
+  //           ]
+  //           client.writeQuery({ query: ROOT_QUERY, data })
+  //       });    
+  // }
 
-  componentWillUnmount() {
-      this.listenForUsers.unsubscribe();
-  }
+  // componentWillUnmount() {
+  //     this.listenForUsers.unsubscribe();
+  // }
   
   render() {
       return (
@@ -61,15 +57,6 @@ class App extends Component {
           <div>
             <AuthorizedUser/>
             <Users/>
-            <Subscription subscription={LISTEN_FOR_USERS}>
-              {({data, loading}) => loading ? 
-                <p>loading a new user...</p> :
-                <div>
-                  <img src={data.newUser.avatar} alt="" />
-                  <h2>{data.newUser.name}</h2>
-                </div>
-              }
-            </Subscription>
           </div>
         </BrowserRouter>
       )
@@ -77,4 +64,5 @@ class App extends Component {
 }
 
 
-export default withApollo(App);
+// export default withApollo(App);
+export default App;

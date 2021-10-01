@@ -1,9 +1,8 @@
-import React, {Component} from 'react';
-import {withRouter} from 'react-router-dom';
-import {Query, Mutation, withApollo} from 'react-apollo';
-import {flowRight as compose} from 'lodash';
-import {gql} from 'apollo-boost';
+import React, {useState, useEffect} from 'react';
+import {useQuery, useMutation} from '@apollo/react-hooks';
+import {useHistory} from 'react-router';
 import {ROOT_QUERY} from './App';
+import {gql} from 'graphql-tag';
 
 const GITHUB_AUTH_MUTATION = gql`
     mutation githubAuth($code: String!){
@@ -21,67 +20,67 @@ const CurrentUser = ({ name, avatar, logout }) =>
         <button onClick={logout}>logout</button>
     </div>
 
-const Me = ({ logout, requestCode, signingIn }) =>
-    <Query query={ROOT_QUERY} fetchPolicy="cache-only">
-        {({ loading, data }) => loading ?
-            <p>loading... </p> :
-            data.me ? 
-            <CurrentUser {...data.me} logout={logout} /> :
+const Me = ({logout, requestCode, signingIn}) => {
+    const { loading, error, data, refetch } =
+        useQuery(ROOT_QUERY, {fetchPolicy: "cache-only"});
+
+        if(loading) return <p>사용자 불러오는 중...</p>;
+        if(error) return `Error! ${error.message}`;
+        if(data.me) return <CurrentUser {...data.me} logout={logout} />
+        else return (
             <button 
                 onClick={requestCode}
                 disabled={signingIn}>
                 Sign In with Github
             </button>
-        }
-    </Query>
+        )
+}
 
-class AuthorizedUser extends Component{
-    
-    state = {signingIn: false};
+const AuthorizedUser = (props) => {
+    let history = useHistory();
+    const [signingIn, setSigninigIn] =  useState(false);
+    const [mutateFunction, { data, loading, error }] =
+        useMutation(
+            GITHUB_AUTH_MUTATION,
+            {
+                variables: {code: ""},
+                update(cache, { data }){
+                    localStorage.setItem('token', data.githubAuth.token);
+                    history.replace('/');
+                    setSigninigIn(false);
+                }
+            }
+        );
 
-    authorizationComplete = (cache, { data }) => {
-        localStorage.setItem('token', data.githubAuth.token);
-        this.props.history.replace('/');
-        this.setState({ signingIn: false });
-    }
-
-    componentDidMount() {
+    useEffect(() => {
         if (window.location.search.match(/code=/)) {
-            this.setState({ signingIn: true });
+            setSigninigIn(true);
             const code = window.location.search.replace("?code=", "");
-            this.githubAuthMutation({ variables: { code } });
+            mutateFunction({variables: {code}});
         }
-    }
-    
-    logout = () => {
-        localStorage.removeItem('token');
-        let data = this.props.client.readQuery({query: ROOT_QUERY});
-        data.me = null;
-        this.props.client.writeQuery({query: ROOT_QUERY, data});
-    }
+    }, []);
 
-    requestCode(){
+    const requestCode = () => {
         const clientID = process.env.REACT_APP_CLIENT_ID
         window.location = `https://github.com/login/oauth/authorize?client_id=${clientID}&scope=user`;
     }
 
-    render() {
-        return (
-            <Mutation 
-                mutation={GITHUB_AUTH_MUTATION}
-                update={this.authorizationComplete}
-                refetchQueries={[{ query: ROOT_QUERY }]}>
-                {mutation => {
-                    this.githubAuthMutation = mutation
-                    return (
-                        <Me signingIn={this.state.signingIn}
-                            requestCode={this.requestCode}
-                            logout={this.logout} />
-                    )
-                }}
-            </Mutation>
-        )
+    const logout = () => {
+        localStorage.removeItem('token');
+        
+        // let data = this.props.client.readQuery({query: ROOT_QUERY});
+        // data.me = null;
+        // this.props.client.writeQuery({query: ROOT_QUERY, data});
     }
+
+    return (
+        <Me 
+            signingIn={signingIn}
+            requestCode={requestCode}
+            logout={logout}
+        />
+    )
+
 }
 
-export default compose(withApollo, withRouter)(AuthorizedUser);
+export default AuthorizedUser;
