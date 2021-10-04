@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from "react";
-import Users from "./Users";
-import { BrowserRouter } from "react-router-dom";
-import { gql } from "graphql-tag";
-import AuthorizedUser from "./AuthorizedUser";
-import { USER_INFO } from "./fragments/userFragment";
+import React, { Fragment, useState, useEffect } from "react";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { useQuery, useMutation } from "@apollo/react-hooks";
 import { NetworkStatus, useSubscription } from "@apollo/client";
+import { gql } from "graphql-tag";
+import Users from "./Users";
+import Photos from "./Photos";
+import PostPhoto from "./PostPhoto";
+import AuthorizedUser from "./AuthorizedUser";
+import { USER_INFO } from "./fragments/userFragment";
 
 export const ROOT_QUERY = gql`
   ${USER_INFO}
@@ -21,7 +23,6 @@ export const ROOT_QUERY = gql`
     allPhotos {
       id
       name
-      url
     }
   }
 `;
@@ -88,11 +89,22 @@ const App = (props) => {
 
   return (
     <BrowserRouter>
-      <TestSubscription />
-      <div>
-        <AuthorizedUser />
-        <Users />
-      </div>
+      <Switch>
+        <Route
+          exact
+          path="/"
+          component={() => (
+            <Fragment>
+              <TestSubscription />
+              <AuthorizedUser />
+              <Users />
+              <Photos />
+            </Fragment>
+          )}
+        />
+        <Route path="/newPhoto" component={PostPhoto} />
+        <Route component={({ location }) => <h1>"{location.pathname}" not found</h1>} />
+      </Switch>
     </BrowserRouter>
   );
 };

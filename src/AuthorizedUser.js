@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useQuery, useMutation } from "@apollo/react-hooks";
+import { withRouter, NavLink } from "react-router-dom";
 import { NetworkStatus } from "@apollo/client";
 import { useHistory } from "react-router";
 import { ROOT_QUERY } from "./App";
@@ -19,6 +20,7 @@ const CurrentUser = ({ name, avatar, logout }) => (
     <h1>{name}</h1>
     {/* 20210922 캐시 조작으로 로그아웃시 리렌더링 되도록 해보기 */}
     <button onClick={logout}>logout</button>
+    <NavLink to="/newPhoto">Post Photo</NavLink>
   </div>
 );
 
