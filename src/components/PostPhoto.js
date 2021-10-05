@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useQuery, useMutation } from "@apollo/react-hooks";
 import { gql } from "graphql-tag";
 import { useHistory } from "react-router";
-import { ROOT_QUERY } from "./App";
+import { ROOT_QUERY } from "components/App";
 
 const POST_PHOTO_MUTATION = gql`
   mutation postPhoto($input: PostPhotoInput!) {

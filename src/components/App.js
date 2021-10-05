@@ -3,11 +3,11 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { useQuery, useMutation } from "@apollo/react-hooks";
 import { NetworkStatus, useSubscription } from "@apollo/client";
 import { gql } from "graphql-tag";
-import Users from "./Users";
-import Photos from "./Photos";
-import PostPhoto from "./PostPhoto";
-import AuthorizedUser from "./AuthorizedUser";
-import { USER_INFO } from "./fragments/userFragment";
+import Users from "components/Users";
+import Photos from "components/Photos";
+import PostPhoto from "components/PostPhoto";
+import AuthorizedUser from "components/AuthorizedUser/AuthorizedUser";
+import { USER_INFO } from "fragments/userFragment";
 
 export const ROOT_QUERY = gql`
   ${USER_INFO}

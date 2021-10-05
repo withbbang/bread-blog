@@ -1,7 +1,7 @@
 import React from "react";
 import { gql } from "graphql-tag";
 import { useQuery, useMutation } from "@apollo/react-hooks";
-import { ROOT_QUERY } from "./App";
+import { ROOT_QUERY } from "components/App";
 import { NetworkStatus } from "@apollo/client";
 
 const ADD_FAKE_USERS_MUTATION = gql`

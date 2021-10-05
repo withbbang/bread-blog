@@ -1,7 +1,7 @@
 import React from "react";
 import { NetworkStatus } from "@apollo/client";
 import { useQuery } from "@apollo/react-hooks";
-import { ROOT_QUERY } from "./App";
+import { ROOT_QUERY } from "components/App";
 
 const Photos = () => {
   const { loading, error, data, refetch, networkStatus } = useQuery(ROOT_QUERY, {

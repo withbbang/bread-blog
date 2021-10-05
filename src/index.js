@@ -1,6 +1,6 @@
 import React from "react";
 import { render } from "react-dom";
-import App from "./App";
+import App from "components/App";
 import { ApolloClient, ApolloProvider, InMemoryCache, HttpLink, split } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 import { WebSocketLink } from "@apollo/client/link/ws";
@@ -46,7 +46,7 @@ const link = split(
     return kind === "OperationDefinition" && operation === "subscription";
   },
   wsLink,
-  httpAuthLink
+  httpAuthLink,
 );
 
 if (localStorage["apollo-cache-persist"]) {
@@ -63,5 +63,5 @@ render(
   <ApolloProvider client={client}>
     <App />
   </ApolloProvider>,
-  document.getElementById("root")
+  document.getElementById("root"),
 );
