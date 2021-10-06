@@ -3,6 +3,8 @@ import { gql } from "graphql-tag";
 import { useQuery, useMutation } from "@apollo/react-hooks";
 import { ROOT_QUERY } from "components/App";
 import { NetworkStatus } from "@apollo/client";
+import styles from "./Users.module.scss";
+import Loader from "components/Loader/Loader";
 
 const ADD_FAKE_USERS_MUTATION = gql`
   mutation addFakeUsers($count: Int!) {
@@ -20,7 +22,7 @@ const Users = () => {
     fetchPolicy: "cache-and-network",
   });
 
-  if (loading || networkStatus === NetworkStatus.refetch) return <p>사용자 불러오는 중...</p>;
+  if (loading || networkStatus === NetworkStatus.refetch) return <Loader loading={loading || networkStatus === NetworkStatus.refetch} />;
   if (error) return `Error! ${error.message}`;
 
   return <UserList count={data.totalUsers} users={data.allUsers} refetchUsers={refetch} />;
@@ -33,11 +35,11 @@ const UserList = ({ count, users, refetchUsers }) => {
     },
   });
 
-  if (loading) return <p>사용자 추가 중...</p>;
+  if (loading) return <Loader loading={loading} />;
   if (error) return alert(`Submission error! ${error.message}`);
 
   return (
-    <div>
+    <div className={styles.wrap}>
       <p>{count} Users</p>
       <button onClick={() => refetchUsers()}>다시 가져오기</button>
       <button onClick={() => mutateFunction()}>임시 사용자 추가</button>

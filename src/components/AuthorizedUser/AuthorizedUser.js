@@ -5,7 +5,8 @@ import { NetworkStatus } from "@apollo/client";
 import { useHistory } from "react-router";
 import { ROOT_QUERY } from "components/App";
 import { gql } from "graphql-tag";
-import "./AuthorizedUser.scss";
+import styles from "./AuthorizedUser.module.scss";
+import Loader from "components/Loader/Loader";
 
 const GITHUB_AUTH_MUTATION = gql`
   mutation githubAuth($code: String!) {
@@ -16,7 +17,7 @@ const GITHUB_AUTH_MUTATION = gql`
 `;
 
 const CurrentUser = ({ name, avatar, logout }) => (
-  <div className={"wrap"}>
+  <div className={styles.wrap}>
     <img src={avatar} width={48} height={48} alt="" />
     <h1>{name}</h1>
     {/* 20210922 캐시 조작으로 로그아웃시 리렌더링 되도록 해보기 */}
@@ -32,7 +33,7 @@ const Me = ({ logout, requestCode, signingIn, isLoggedIn }) => {
     if (isLoggedIn) refetch();
   }, [isLoggedIn]);
 
-  if (networkStatus === NetworkStatus.refetch) return <p>사용자 불러오는 중...</p>;
+  if (networkStatus === NetworkStatus.refetch) return <Loader loading={loading} />;
   if (error) return `Error! ${error.message}`;
   if (data.me) return <CurrentUser {...data.me} logout={logout} />;
   else

@@ -3,6 +3,7 @@ import { useQuery, useMutation } from "@apollo/react-hooks";
 import { gql } from "graphql-tag";
 import { useHistory } from "react-router";
 import { ROOT_QUERY } from "components/App";
+import Loader from "components/Loader/Loader";
 
 const POST_PHOTO_MUTATION = gql`
   mutation postPhoto($input: PostPhotoInput!) {
@@ -29,7 +30,7 @@ const Uploadfile = (input) => {
     history.replace("/");
   };
 
-  if (loading) return <p>사진 업로드 중...</p>;
+  if (loading) return <Loader loading={loading} />;
   if (error) alert(`Submission error! ${error.message}`);
 
   return (

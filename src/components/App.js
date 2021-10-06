@@ -3,9 +3,9 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { useQuery, useMutation } from "@apollo/react-hooks";
 import { NetworkStatus, useSubscription } from "@apollo/client";
 import { gql } from "graphql-tag";
-import Users from "components/Users";
-import Photos from "components/Photos";
-import PostPhoto from "components/PostPhoto";
+import Users from "components/Users/Users";
+import Photos from "components/Photos/Photos";
+import PostPhoto from "components/PostPhoto/PostPhoto";
 import AuthorizedUser from "components/AuthorizedUser/AuthorizedUser";
 import { USER_INFO } from "fragments/userFragment";
 

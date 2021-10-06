@@ -6,6 +6,7 @@ import { setContext } from "@apollo/client/link/context";
 import { WebSocketLink } from "@apollo/client/link/ws";
 import { getMainDefinition } from "@apollo/client/utilities";
 import { persistCache } from "apollo-cache-persist";
+import { createUploadLink } from "apollo-upload-client";
 
 const cache = new InMemoryCache();
 
@@ -17,7 +18,7 @@ const persist_cache = async () =>
 
 persist_cache();
 
-const httpLink = new HttpLink({ uri: "http://localhost:4000/graphql" });
+const httpLink = new createUploadLink({ uri: "http://localhost:4000/graphql" });
 const authLink = setContext((_, { headers }) => {
   const token = localStorage.getItem("token");
   return {
