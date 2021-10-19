@@ -22,6 +22,7 @@ export const ROOT_QUERY = gql`
     }
     allPhotos {
       id
+      url
       name
     }
   }
