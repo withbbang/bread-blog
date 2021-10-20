@@ -1,7 +1,35 @@
 import React from "react";
-import { NetworkStatus } from "@apollo/client";
+import { NetworkStatus, useMutation } from "@apollo/client";
 import { useQuery } from "@apollo/react-hooks";
 import { ROOT_QUERY } from "components/App";
+import { gql } from "graphql-tag";
+import Loader from "components/Loader/Loader";
+
+const DELETE_PHOTO_MUTATION = gql`
+  mutation deletePhoto($id: String!) {
+    deletePhoto(id: $id)
+  }
+`;
+
+const DeletePhoto = ({ id }) => {
+  const [mutationFunction, { data, loading, error }] = useMutation(DELETE_PHOTO_MUTATION, {
+    variables: {
+      id,
+    },
+    refetchQueries: [ROOT_QUERY, "allPhotos"],
+  });
+
+  const deletePhoto = async () => {
+    if (window.confirm("Do you really want to delete it?")) {
+      await mutationFunction();
+    }
+  };
+
+  if (loading) return <Loader loading={loading} />;
+  if (error) alert(`Delete error! ${error.message}`);
+
+  return <button onClick={deletePhoto}>사진 삭제하기</button>;
+};
 
 const Photos = () => {
   const { loading, error, data, refetch, networkStatus } = useQuery(ROOT_QUERY, {
@@ -15,7 +43,10 @@ const Photos = () => {
   return (
     <>
       {data.allPhotos.map((photo) => (
-        <img key={photo.id} src={photo.url} alt={photo.name} width={350} />
+        <div>
+          <img key={photo.id} src={photo.url} alt={photo.name} width={350} />
+          <DeletePhoto id={photo.id} />
+        </div>
       ))}
     </>
   );

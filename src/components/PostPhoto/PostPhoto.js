@@ -25,7 +25,6 @@ const Uploadfile = (input) => {
   });
 
   const upload = async () => {
-    console.log(input);
     await mutateFunction();
     history.replace("/");
   };
