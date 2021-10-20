@@ -16,6 +16,12 @@ const ADD_FAKE_USERS_MUTATION = gql`
   }
 `;
 
+const DELETE_FAKE_USER_MUTATION = gql`
+  mutation deleteFakeUser($input: DeleteFakeUserInput!) {
+    deleteFakeUser(input: $input)
+  }
+`;
+
 const Users = () => {
   const { loading, error, data, refetch, networkStatus } = useQuery(ROOT_QUERY, {
     notifyOnNetworkStatusChange: true,
@@ -45,18 +51,39 @@ const UserList = ({ count, users, refetchUsers }) => {
       <button onClick={() => mutateFunction()}>임시 사용자 추가</button>
       <ul>
         {users.map((user) => (
-          <UserListItem key={user.githubLogin} name={user.name} avatar={user.avatar} />
+          <UserListItem key={user.githubLogin} githubLogin={user.githubLogin} name={user.name} avatar={user.avatar} />
         ))}
       </ul>
     </div>
   );
 };
 
-const UserListItem = ({ name, avatar }) => (
+const UserListItem = ({ githubLogin, name, avatar }) => (
   <li>
     <img src={avatar} width={48} height={48} alt="" />
     {name}
+    <DeleteFakeUser githubLogin={githubLogin} name={name} />
   </li>
 );
+
+const DeleteFakeUser = (input) => {
+  const [mutationFunction, { data, loading, error }] = useMutation(DELETE_FAKE_USER_MUTATION, {
+    variables: {
+      input,
+    },
+    refetchQueries: [ROOT_QUERY, "allUsers"],
+  });
+
+  const deleteFakeUser = async () => {
+    if (window.confirm("Do you really want to delete this user?")) {
+      await mutationFunction();
+    }
+  };
+
+  if (loading) return <Loader loading={loading} />;
+  if (error) alert(`Delete error! ${error.message}`);
+
+  return <button onClick={deleteFakeUser}>유저 삭제</button>;
+};
 
 export default Users;
