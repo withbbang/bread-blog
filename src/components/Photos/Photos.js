@@ -42,9 +42,9 @@ const Photos = () => {
 
   return (
     <>
-      {data.allPhotos.map((photo) => (
-        <div>
-          <img key={photo.id} src={photo.url} alt={photo.name} width={350} />
+      {data.allPhotos.map((photo, idx) => (
+        <div key={idx}>
+          <img src={photo.url} alt={photo.name} width={350} />
           <DeletePhoto id={photo.id} />
         </div>
       ))}

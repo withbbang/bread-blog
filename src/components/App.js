@@ -60,7 +60,6 @@ const TestSubscription = () => {
   };
 
   count++;
-  console.log(count);
 
   if (loading) return <input id="test" />;
   if (error) return alert(error.message);

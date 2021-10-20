@@ -35,7 +35,7 @@ const Me = ({ logout, requestCode, signingIn, isLoggedIn }) => {
 
   if (networkStatus === NetworkStatus.refetch) return <Loader loading={loading} />;
   if (error) return `Error! ${error.message}`;
-  if (data) return <CurrentUser {...data.me} logout={logout} />;
+  if (data.me) return <CurrentUser {...data.me} logout={logout} />;
   else
     return (
       <button onClick={requestCode} disabled={signingIn}>
