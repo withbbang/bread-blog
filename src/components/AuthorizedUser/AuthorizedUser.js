@@ -16,6 +16,45 @@ const GITHUB_AUTH_MUTATION = gql`
   }
 `;
 
+const CREATE_USER = gql`
+  mutation createUser($input: CreateUserInput!) {
+    createUser(input: $input) {
+      email
+      name
+    }
+  }
+`;
+
+const CreateUser = () => {
+  const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
+  const [mutateFunction, { data, loading, error }] = useMutation(CREATE_USER, {
+    variables: {
+      input: {
+        name,
+        email,
+      },
+    },
+  });
+
+  const doCreateUser = () => {
+    if (email !== "" && name !== "") mutateFunction();
+    else alert("Do not empty email & name field");
+  };
+
+  if (loading) return <Loader loading={loading} />;
+  if (error) alert(`Submission error! ${error.message}`);
+  if (data) console.log(data);
+
+  return (
+    <div style={{ margin: "10px" }}>
+      <input onChange={(e) => setEmail(e.target.value)} />
+      <input onChange={(e) => setName(e.target.value)} />
+      <button onClick={doCreateUser}>sign up!</button>
+    </div>
+  );
+};
+
 const CurrentUser = ({ name, avatar, logout }) => (
   <div className={styles.wrap}>
     <img src={avatar} width={48} height={48} alt="" />
@@ -80,7 +119,7 @@ const AuthorizedUser = () => {
     // this.props.client.writeQuery({query: ROOT_QUERY, data});
   };
 
-  return <Me signingIn={signingIn} requestCode={requestCode} logout={logout} isLoggedIn={isLoggedIn} />;
+  return <CreateUser />;
 };
 
 export default AuthorizedUser;
