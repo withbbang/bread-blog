@@ -19,8 +19,28 @@ const GITHUB_AUTH_MUTATION = gql`
 const CREATE_USER = gql`
   mutation createUser($input: CreateUserInput!) {
     createUser(input: $input) {
-      email
       name
+      email
+    }
+  }
+`;
+
+const REQUEST_LOGIN = gql`
+  mutation requestLogin($email: String!) {
+    requestLogin(email: $email) {
+      name
+      email
+      avatar
+    }
+  }
+`;
+
+const CONFIRM_LOGIN = gql`
+  mutation confirmLogin($input: ConfirmLoginInput!) {
+    confirmLogin(input: $input) {
+      name
+      email
+      avatar
     }
   }
 `;
@@ -35,26 +55,82 @@ const CreateUser = () => {
         email,
       },
     },
+    onError: (error) => alert(error),
   });
 
   const doCreateUser = () => {
     if (email !== "" && name !== "") mutateFunction();
-    else alert("Do not empty email & name field");
+    else alert("Do not empty both email & name fields");
   };
 
-  if (loading) return <Loader loading={loading} />;
-  if (error) alert(`Submission error! ${error.message}`);
-  if (data) console.log(data);
-
   return (
-    <div style={{ margin: "10px" }}>
-      <input onChange={(e) => setEmail(e.target.value)} />
-      <input onChange={(e) => setName(e.target.value)} />
-      <button onClick={doCreateUser}>sign up!</button>
-    </div>
+    <>
+      <Loader loading={loading} />
+      <div style={{ margin: "10px" }}>
+        <input onChange={(e) => setEmail(e.target.value)} />
+        <input onChange={(e) => setName(e.target.value)} />
+        <button onClick={doCreateUser}>sign up!</button>
+        <RequestLogin email={email} />
+      </div>
+    </>
   );
 };
 
+const RequestLogin = ({ email }) => {
+  const [secretWord, setSecretWord] = useState("");
+  const [mutateFunction, { data, loading, error }] = useMutation(REQUEST_LOGIN, {
+    variables: {
+      email,
+    },
+    onError: (error) => alert(error),
+  });
+
+  const doRequestLogin = () => {
+    if (email !== "") mutateFunction();
+    else alert("Do not empty email field");
+  };
+
+  return (
+    <>
+      <Loader loading={loading} />
+      <div style={{ margin: "10px" }}>
+        <button onClick={doRequestLogin}>Request Secret Words!</button>
+        {data && (
+          <>
+            <input onChange={(e) => setSecretWord(e.target.value)} />
+            <ConfirmLogin email={email} secretWord={secretWord} />
+          </>
+        )}
+      </div>
+    </>
+  );
+};
+
+const ConfirmLogin = ({ email, secretWord }) => {
+  const [mutateFunction, { data, loading, error }] = useMutation(CONFIRM_LOGIN, {
+    variables: {
+      input: {
+        email,
+        secretWord,
+      },
+    },
+    onError: (error) => alert(error),
+  });
+
+  const doConfirmLogin = () => {
+    if (secretWord !== "") mutateFunction();
+    else alert("Do not empty secret words field");
+  };
+
+  return (
+    <>
+      <Loader loading={loading} />
+      <div style={{ margin: "10px" }}>
+        <button onClick={doConfirmLogin}>login!</button>
+      </div>
+    </>
+  );
+};
 const CurrentUser = ({ name, avatar, logout }) => (
   <div className={styles.wrap}>
     <img src={avatar} width={48} height={48} alt="" />
@@ -72,14 +148,16 @@ const Me = ({ logout, requestCode, signingIn, isLoggedIn }) => {
     if (isLoggedIn) refetch();
   }, [isLoggedIn]);
 
-  if (networkStatus === NetworkStatus.refetch) return <Loader loading={loading} />;
   if (error) return `Error! ${error.message}`;
   if (data.me) return <CurrentUser {...data.me} logout={logout} />;
   else
     return (
-      <button onClick={requestCode} disabled={signingIn}>
-        Sign In with Github
-      </button>
+      <>
+        <Loader loading={loading || networkStatus === NetworkStatus.refetch} />
+        <button onClick={requestCode} disabled={signingIn}>
+          Sign In with Github
+        </button>
+      </>
     );
 };
 

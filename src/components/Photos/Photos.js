@@ -25,10 +25,14 @@ const DeletePhoto = ({ id }) => {
     }
   };
 
-  if (loading) return <Loader loading={loading} />;
   if (error) alert(`Delete error! ${error.message}`);
 
-  return <button onClick={deletePhoto}>사진 삭제하기</button>;
+  return (
+    <>
+      <Loader loading={loading} />
+      <button onClick={deletePhoto}>사진 삭제하기</button>
+    </>
+  );
 };
 
 const Photos = () => {

@@ -41,20 +41,22 @@ const UserList = ({ count, users, refetchUsers }) => {
     },
   });
 
-  if (loading) return <Loader loading={loading} />;
   if (error) return alert(`Submission error! ${error.message}`);
 
   return (
-    <div className={styles.wrap}>
-      <p>{count} Users</p>
-      <button onClick={() => refetchUsers()}>다시 가져오기</button>
-      <button onClick={() => mutateFunction()}>임시 사용자 추가</button>
-      <ul>
-        {users.map((user) => (
-          <UserListItem key={user.githubLogin} githubLogin={user.githubLogin} name={user.name} avatar={user.avatar} />
-        ))}
-      </ul>
-    </div>
+    <>
+      <Loader loading={loading} />
+      <div className={styles.wrap}>
+        <p>{count} Users</p>
+        <button onClick={() => refetchUsers()}>다시 가져오기</button>
+        <button onClick={() => mutateFunction()}>임시 사용자 추가</button>
+        <ul>
+          {users.map((user) => (
+            <UserListItem key={user.githubLogin} githubLogin={user.githubLogin} name={user.name} avatar={user.avatar} />
+          ))}
+        </ul>
+      </div>
+    </>
   );
 };
 
@@ -80,10 +82,14 @@ const DeleteFakeUser = (input) => {
     }
   };
 
-  if (loading) return <Loader loading={loading} />;
   if (error) alert(`Delete error! ${error.message}`);
 
-  return <button onClick={deleteFakeUser}>유저 삭제</button>;
+  return (
+    <>
+      <Loader loading={loading} />
+      <button onClick={deleteFakeUser}>유저 삭제</button>
+    </>
+  );
 };
 
 export default Users;
