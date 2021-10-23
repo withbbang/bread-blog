@@ -38,9 +38,8 @@ const REQUEST_LOGIN = gql`
 const CONFIRM_LOGIN = gql`
   mutation confirmLogin($input: ConfirmLoginInput!) {
     confirmLogin(input: $input) {
-      name
-      email
-      avatar
+      token
+      refreshToken
     }
   }
 `;
@@ -113,6 +112,11 @@ const ConfirmLogin = ({ email, secretWord }) => {
         email,
         secretWord,
       },
+    },
+    update(cache, { data }) {
+      console.log(data);
+      localStorage.setItem("token", data.confirmLogin.token);
+      localStorage.setItem("refreshToken", data.confirmLogin.refreshToken);
     },
     onError: (error) => alert(error),
   });

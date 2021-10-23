@@ -3,11 +3,15 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { useQuery, useMutation } from "@apollo/react-hooks";
 import { NetworkStatus, useSubscription } from "@apollo/client";
 import { gql } from "graphql-tag";
+import Index from "components/Index/index";
+import JoinMembership from "components/JoinMembership/index";
+import Dashboard from "components/Dashboard/index";
 import Users from "components/Users/Users";
 import Photos from "components/Photos/Photos";
 import PostPhoto from "components/PostPhoto/PostPhoto";
 import AuthorizedUser from "components/AuthorizedUser/AuthorizedUser";
 import { USER_INFO } from "fragments/userFragment";
+import TestRequestBtn from "./TestRequestComponent/TestRequestComponent";
 
 export const ROOT_QUERY = gql`
   ${USER_INFO}
@@ -90,18 +94,23 @@ const App = (props) => {
   return (
     <BrowserRouter>
       <Switch>
-        <Route
+        <Route exact path="/" component={Index} />
+        {/* <Route
           exact
           path="/"
           component={() => (
             <Fragment>
+              <Index />
               <TestSubscription />
               <AuthorizedUser />
+              <TestRequestBtn />
               <Users />
               <Photos />
             </Fragment>
           )}
-        />
+        /> */}
+        <Route exact path="/join-membership" component={JoinMembership} />
+        <Route exact path="/dashboard" component={Dashboard} />
         <Route path="/newPhoto" component={PostPhoto} />
         <Route component={({ location }) => <h1>"{location.pathname}" not found</h1>} />
       </Switch>
