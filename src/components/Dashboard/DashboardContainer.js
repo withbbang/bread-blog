@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useMutation } from "@apollo/react-hooks";
+import { useQuery, useMutation } from "@apollo/react-hooks";
 import { useHistory } from "react-router";
 import * as queries from "./Queries";
 import DashboardPresenter from "./DashboardPresenter";
