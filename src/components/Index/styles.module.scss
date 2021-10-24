@@ -1,21 +1,193 @@
 .wrap {
-  .divider_wrap {
-    position: absolute;
-    bottom: 0;
-    left: 0;
+  width: 100%;
+  height: 100%;
+
+  .header {
+    position: fixed;
     width: 100%;
-    overflow: hidden;
-    line-height: 0;
-    transform: rotate(180deg);
+    height: 70px;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
 
-    > svg {
-      position: relative;
-      display: block;
-      width: calc(100% + 1.3px);
-      height: 120px;
+    > div {
+      box-sizing: border-box;
+    }
 
-      .shape_fill {
-        fill: #ffffff;
+    .search_bar {
+      display: flex;
+      padding: 0 10px 0 10px;
+      align-items: center;
+      width: fit-content;
+      height: 50px;
+      border-bottom: solid 1px #fff;
+
+      > div {
+        cursor: pointer;
+      }
+
+      > input {
+        font-size: 20px;
+        color: #fff;
+        width: 120px;
+        border: none;
+        background: transparent;
+      }
+
+      > input:focus {
+        outline: none;
+      }
+
+      .close_hide {
+        visibility: hidden;
+      }
+    }
+
+    .title {
+      position: absolute;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 25px;
+      font-weight: bold;
+      color: #fff;
+      user-select: none;
+      > img {
+        width: 30px;
+        height: 30px;
+      }
+    }
+
+    .membership_bar {
+      display: flex;
+      align-items: center;
+      width: fit-content;
+
+      > input {
+        font-size: 15px;
+        color: #fff;
+        width: 130px;
+        padding: 10px;
+        border: none;
+        background: transparent;
+        margin-right: 10px;
+      }
+
+      > input:focus {
+        outline: none;
+        box-shadow: 0 0 3px 2px #a19f9d;
+      }
+
+      > input::placeholder {
+        color: #eee;
+      }
+
+      > button {
+        background: linear-gradient(
+          0deg,
+          rgba(177, 177, 177, 1) 0%,
+          rgba(108, 106, 100, 1) 52%,
+          rgba(177, 177, 177, 1) 100%
+        );
+        box-sizing: border-box;
+        padding: 10px;
+        font-size: 15px;
+        border: none;
+        transition: all 0.9s;
+        border-radius: 10%;
+        cursor: pointer;
+      }
+
+      > button:hover {
+        box-shadow: 200px 0 0 0 rgba(254, 242, 222, 0.25) inset, -200px 0 0 0 rgba(254, 242, 222, 0.25) inset;
+      }
+
+      :nth-child(2) {
+        margin-right: 10px;
+      }
+    }
+  }
+
+  .contents {
+    display: flex;
+    width: 100%;
+    height: 100%;
+
+    .left_section {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      width: 50%;
+
+      > img {
+        border-radius: 3%;
+      }
+    }
+
+    .right_section {
+      color: #fff;
+      height: 100%;
+      width: 50%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background-color: rgba(211, 211, 211, 0.3);
+      line-height: 0;
+
+      .links {
+        margin-top: 50px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        .link {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          border-radius: 3%;
+          box-sizing: border-box;
+          margin-top: 15px;
+          width: 70%;
+          height: 50px;
+          cursor: pointer;
+
+          &:nth-child(1) {
+            background-color: rgb(51, 51, 51);
+          }
+
+          &:nth-child(2) {
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+          }
+
+          > svg,
+          img {
+            width: 30px;
+            height: 30px;
+            margin-right: 10px;
+          }
+        }
+      }
+      .logos {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        width: 70%;
+        margin-top: 50px;
+      }
+
+      .info {
+        width: 70%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #000;
+        margin-top: 100px;
       }
     }
   }

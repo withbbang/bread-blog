@@ -3,9 +3,10 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { useQuery, useMutation } from "@apollo/react-hooks";
 import { NetworkStatus, useSubscription } from "@apollo/client";
 import { gql } from "graphql-tag";
-import Index from "components/Index/index";
-import JoinMembership from "components/JoinMembership/index";
-import Dashboard from "components/Dashboard/index";
+import Background from "components/Background";
+import Index from "components/Index";
+import JoinMembership from "components/JoinMembership";
+import Dashboard from "components/Dashboard";
 import Users from "components/Users/Users";
 import Photos from "components/Photos/Photos";
 import PostPhoto from "components/PostPhoto/PostPhoto";
@@ -76,26 +77,28 @@ const TestSubscription = () => {
 const App = (props) => {
   const [fetchTest, setFetchTest] = useState(false);
 
-  useEffect(() => {
-    // let { client } = this.props;
-    // this.listenForUsers = client
-    //     .subscribe({ query: LISTEN_FOR_USERS })
-    //     .subscribe(({ data:{ newUser } }) => {
-    //         const data = client.readQuery({ query: ROOT_QUERY })
-    //         data.totalUsers += 1
-    //         data.allUsers = [
-    //             ...data.allUsers,
-    //             newUser
-    //         ]
-    //         client.writeQuery({ query: ROOT_QUERY, data })
-    //     });
-  }, [fetchTest]);
+  // useEffect(() => {
+  //   let { client } = this.props;
+  //   this.listenForUsers = client
+  //       .subscribe({ query: LISTEN_FOR_USERS })
+  //       .subscribe(({ data:{ newUser } }) => {
+  //           const data = client.readQuery({ query: ROOT_QUERY })
+  //           data.totalUsers += 1
+  //           data.allUsers = [
+  //               ...data.allUsers,
+  //               newUser
+  //           ]
+  //           client.writeQuery({ query: ROOT_QUERY, data })
+  //       });
+  // }, [fetchTest]);
 
   return (
-    <BrowserRouter>
-      <Switch>
-        <Route exact path="/" component={Index} />
-        {/* <Route
+    <>
+      <Background />
+      <BrowserRouter>
+        <Switch>
+          <Route exact path="/" component={Index} />
+          {/* <Route
           exact
           path="/"
           component={() => (
@@ -109,12 +112,13 @@ const App = (props) => {
             </Fragment>
           )}
         /> */}
-        <Route exact path="/join-membership" component={JoinMembership} />
-        <Route exact path="/dashboard" component={Dashboard} />
-        <Route path="/newPhoto" component={PostPhoto} />
-        <Route component={({ location }) => <h1>"{location.pathname}" not found</h1>} />
-      </Switch>
-    </BrowserRouter>
+          <Route exact path="/join-membership" component={JoinMembership} />
+          <Route exact path="/dashboard" component={Dashboard} />
+          <Route path="/newPhoto" component={PostPhoto} />
+          <Route component={({ location }) => <h1>"{location.pathname}" not found</h1>} />
+        </Switch>
+      </BrowserRouter>
+    </>
   );
 };
 
