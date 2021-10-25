@@ -44,7 +44,7 @@ const IndexPresenter = (props) => (
           ref={props.emailRef}
         />
         <button onClick={props.doRequestLogin}>Login</button>
-        <button onClick={props.goToJoinMembership}>Join</button>
+        {/* <button onClick={props.goToJoinMembership}>Join</button> */}
       </div>
     </div>
     <div className={styles.contents}>
@@ -84,7 +84,7 @@ const IndexPresenter = (props) => (
         secretErr={props.secretErr}
       />
     )}
-    {props.emailErr && <ErrorModal setEmailErr={props.setEmailErr} err={props.emailErr} />}
+    {props.emailErr && <ErrorModal setErr={props.setEmailErr} err={props.emailErr} />}
   </div>
 );
 

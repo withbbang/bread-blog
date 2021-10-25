@@ -1,13 +1,17 @@
 import React, { useEffect, useState, useRef } from "react";
+import { useMediaQuery } from "react-responsive";
 import { useMutation } from "@apollo/react-hooks";
 import { useHistory } from "react-router";
 import * as queries from "./Queries";
 import IndexPresenter from "./IndexPresenter";
+import MindexPresenter from "./mobile/MindexPresenter";
 
 const IndexContainer = () => {
   useEffect(() => {
     if (localStorage.getItem("token")) history.replace("/dashboard");
   }, []);
+
+  const isMobile = useMediaQuery({ maxWidth: 767 });
 
   const history = useHistory();
   const [email, setEmail] = useState("");
@@ -64,10 +68,7 @@ const IndexContainer = () => {
     if (email !== "") {
       setLoading(true);
       requestLoginMutation();
-    } else {
-      emailRef.current.focus();
-      setEmailErr("Do not empty email field");
-    }
+    } else setEmailErr("Do not empty email field");
   };
 
   const doConfirmLogin = (id) => {
@@ -84,9 +85,7 @@ const IndexContainer = () => {
     if (search !== "") {
       // setLoading(true);
       console.log("searching...");
-    } else {
-      searchRef.current.focus();
-    }
+    } else searchRef.current.focus();
   };
 
   const onSearchPress = (e) => {
@@ -103,7 +102,9 @@ const IndexContainer = () => {
 
   const goToJoinMembership = () => history.push("/join-membership");
 
-  return (
+  return isMobile ? (
+    <MindexPresenter />
+  ) : (
     <IndexPresenter
       loading={loading}
       search={search}
@@ -125,6 +126,7 @@ const IndexContainer = () => {
       emailErr={emailErr}
       setEmailErr={setEmailErr}
       secretErr={secretErr}
+      isMobile={isMobile}
     />
   );
 };
