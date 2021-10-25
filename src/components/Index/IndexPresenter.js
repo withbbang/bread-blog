@@ -6,12 +6,15 @@ import ErrorModal from "components/ErrorModal/ErrorModal";
 import bread from "resource/images/bread.png";
 import developerImage from "resource/images/developerImage.jpg";
 import instagramColor from "resource/images/instagramColor.svg";
-import { Close, Search, Github, Instagram, GithubReverse } from "resource/images/SVG";
+import { More, Close, Search, Github, Instagram, GithubReverse } from "resource/images/SVG";
 
 const IndexPresenter = (props) => (
   <div className={styles.wrap}>
     <Loader loading={props.loading} />
     <div className={styles.header}>
+      <div className={styles.more}>
+        <More width="40px" height="40px" fill="#fff" />
+      </div>
       <div className={styles.search_bar}>
         <input
           onChange={(e) => props.setSearch(e.target.value)}
