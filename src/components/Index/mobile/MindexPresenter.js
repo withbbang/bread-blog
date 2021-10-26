@@ -11,12 +11,12 @@ import { More, Close, Search, Github, Instagram, GithubReverse } from "resource/
 const MindexPresenter = (props) => (
   <div className={styles.wrap}>
     <div className={styles.header}>
-      <div className={styles.more}>
-        <More width="30px" height="30px" fill="#fff" />
-      </div>
       <div className={styles.title}>
         <img src={bread} />
         's Blog
+      </div>
+      <div className={styles.more}>
+        <More width="30px" height="30px" fill="#fff" />
       </div>
     </div>
     <div className={styles.first_section} />
