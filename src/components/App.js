@@ -1,5 +1,5 @@
 import React, { Fragment, useState, useEffect } from "react";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import { useQuery, useMutation } from "@apollo/react-hooks";
 import { NetworkStatus, useSubscription } from "@apollo/client";
 import { gql } from "graphql-tag";
@@ -115,7 +115,7 @@ const App = (props) => {
           <Route exact path="/join-membership" component={JoinMembership} />
           <Route exact path="/dashboard" component={Dashboard} />
           <Route path="/newPhoto" component={PostPhoto} />
-          <Route component={({ location }) => <h1>"{location.pathname}" not found</h1>} />
+          <Route path="*" component={({ location }) => <div>"{location.pathname}" not found</div>} />
         </Switch>
       </BrowserRouter>
     </>

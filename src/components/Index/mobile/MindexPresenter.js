@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./styles.module.scss";
 import Loader from "components/Loader/Loader";
+import Header from "components/Header";
 import SecretWordModal from "../SecretWordModal/SecretWordModal";
 import ErrorModal from "components/ErrorModal/ErrorModal";
 import bread from "resource/images/bread.png";
@@ -10,15 +11,7 @@ import { More, Close, Search, Github, Instagram, GithubReverse } from "resource/
 
 const MindexPresenter = (props) => (
   <div className={styles.wrap}>
-    <div className={styles.header}>
-      <div className={styles.title}>
-        <img src={bread} />
-        's Blog
-      </div>
-      <div className={styles.more}>
-        <More width="30px" height="30px" fill="#fff" />
-      </div>
-    </div>
+    <Header />
     <div className={styles.first_section} />
     <div className={styles.second_section}>
       <img src={developerImage} />

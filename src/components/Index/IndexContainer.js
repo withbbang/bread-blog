@@ -4,7 +4,7 @@ import { useMutation } from "@apollo/react-hooks";
 import { useHistory } from "react-router";
 import * as queries from "./Queries";
 import IndexPresenter from "./IndexPresenter";
-import MindexPresenter from "./mobile/MindexPresenter";
+import MIndexPresenter from "./mobile/MIndexPresenter";
 
 const IndexContainer = () => {
   useEffect(() => {
@@ -103,7 +103,7 @@ const IndexContainer = () => {
   const goToJoinMembership = () => history.push("/join-membership");
 
   return isMobile ? (
-    <MindexPresenter />
+    <MIndexPresenter />
   ) : (
     <IndexPresenter
       loading={loading}
