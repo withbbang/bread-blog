@@ -7,7 +7,12 @@ const SecretWordModal = (props) => (
     <div className={styles.inner_wrap}>
       <div className={styles.header}>
         <h2>Login</h2>
-        <div className={styles.svg} onClick={() => props.setViewSecretWordModal(!props.viewSecretWordModal)}>
+        <div
+          className={styles.svg}
+          onClick={() =>
+            props.setViewSecretWordModal(!props.viewSecretWordModal)
+          }
+        >
           <Close fill="#000" width="40px" height="40px" />
         </div>
       </div>
@@ -26,7 +31,7 @@ const SecretWordModal = (props) => (
         />
         <button onClick={props.doConfirmLogin}>Login</button>
       </div>
-      <div class={styles.err}>{props.secretErr && props.secretErr}</div>
+      <div className={styles.err}>{props.secretErr && props.secretErr}</div>
     </div>
   </div>
 );

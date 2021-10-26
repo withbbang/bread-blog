@@ -54,6 +54,7 @@ const SideBarContainer = (props) => {
     onCompleted: () => {
       setSecretErr("");
       setLoading(false);
+      setViewSecretWordModal(false);
       history.replace("/");
     },
   });
@@ -83,7 +84,47 @@ const SideBarContainer = (props) => {
     e.key === "Enter" && doConfirmLogin();
   };
 
-  return isMobile ? <MSideBarPresenter {...props} /> : <SideBarPresenter {...props} />;
+  return isMobile ? (
+    <MSideBarPresenter
+      {...props}
+      email={email}
+      setEmail={setEmail}
+      secretWord={secretWord}
+      setSecretWord={setSecretWord}
+      loading={loading}
+      emailErr={emailErr}
+      setEmailErr={setEmailErr}
+      secretErr={secretErr}
+      viewSecretWordModal={viewSecretWordModal}
+      setViewSecretWordModal={setViewSecretWordModal}
+      emailRef={emailRef}
+      secretWordRef={secretWordRef}
+      doRequestLogin={doRequestLogin}
+      doConfirmLogin={doConfirmLogin}
+      onEmailPress={onEmailPress}
+      onSecretWordsPress={onSecretWordsPress}
+    />
+  ) : (
+    <SideBarPresenter
+      {...props}
+      email={email}
+      setEmail={setEmail}
+      secretWord={secretWord}
+      setSecretWord={setSecretWord}
+      loading={loading}
+      emailErr={emailErr}
+      setEmailErr={setEmailErr}
+      secretErr={secretErr}
+      viewSecretWordModal={viewSecretWordModal}
+      setViewSecretWordModal={setViewSecretWordModal}
+      emailRef={emailRef}
+      secretWordRef={secretWordRef}
+      doRequestLogin={doRequestLogin}
+      doConfirmLogin={doConfirmLogin}
+      onEmailPress={onEmailPress}
+      onSecretWordsPress={onSecretWordsPress}
+    />
+  );
 };
 
 export default SideBarContainer;

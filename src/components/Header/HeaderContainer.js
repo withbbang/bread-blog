@@ -9,7 +9,7 @@ const HeaderContainer = () => {
 
   const [loading, setLoading] = useState(false);
   const [search, setSearch] = useState("");
-  const [sideToggle, setSideToggle] = useState(false);
+  const [sideToggle, setSideToggle] = useState(true);
 
   const searchRef = useRef();
 
@@ -25,7 +25,11 @@ const HeaderContainer = () => {
   };
 
   return isMobile ? (
-    <MHeaderPresenter />
+    <MHeaderPresenter
+      loading={loading}
+      sideToggle={sideToggle}
+      setSideToggle={setSideToggle}
+    />
   ) : (
     <HeaderPresenter
       loading={loading}
