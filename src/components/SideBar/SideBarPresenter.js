@@ -15,7 +15,11 @@ import {
 const SideBarPresenter = (props) => (
   <>
     {/* TODO: className join 거는 법 */}
-    <div className={props.sideToggle ? styles.wrap_on : styles.wrap_off}>
+    <div
+      className={
+        props.sideToggle ? styles.wrap : [styles.wrap, styles.off].join(" ")
+      }
+    >
       <div className={styles.inner_wrap}>
         <div
           className={styles.close}

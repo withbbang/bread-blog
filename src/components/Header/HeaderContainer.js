@@ -9,7 +9,7 @@ const HeaderContainer = () => {
 
   const [loading, setLoading] = useState(false);
   const [search, setSearch] = useState("");
-  const [sideToggle, setSideToggle] = useState(true);
+  const [sideToggle, setSideToggle] = useState(false);
 
   const searchRef = useRef();
 
