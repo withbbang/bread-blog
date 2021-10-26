@@ -1,13 +1,9 @@
 import React from "react";
 import styles from "./styles.module.scss";
-import Loader from "components/Loader/Loader";
 import Header from "components/Header";
-import SecretWordModal from "../SecretWordModal/SecretWordModal";
-import ErrorModal from "components/ErrorModal/ErrorModal";
-import bread from "resource/images/bread.png";
 import developerImage from "resource/images/developerImage4.jpg";
 import instagramColor from "resource/images/instagramColor.svg";
-import { More, Close, Search, Github, Instagram, GithubReverse } from "resource/images/SVG";
+import { Github, Instagram, GithubReverse } from "resource/images/SVG";
 
 const MindexPresenter = (props) => (
   <div className={styles.wrap}>

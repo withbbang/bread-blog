@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./styles.module.scss";
 import Loader from "components/Loader/Loader";
+import SideBar from "components/SideBar";
 import bread from "resource/images/bread.png";
 import { More, Close, Search } from "resource/images/SVG";
 
@@ -10,6 +11,7 @@ const HeaderPresenter = (props) => (
     <div className={styles.header}>
       <div className={styles.more}>
         <More width="40px" height="40px" fill="#fff" />
+        <SideBar sideToggle={props.sideToggle} setSideToggle={props.setSideToggle} />
       </div>
       <div className={styles.title}>
         <img src={bread} />
