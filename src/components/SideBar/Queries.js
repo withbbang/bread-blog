@@ -18,3 +18,13 @@ export const CONFIRM_LOGIN = gql`
     }
   }
 `;
+
+export const ME = gql`
+  query Query {
+    me {
+      email
+      name
+      avatar
+    }
+  }
+`;

@@ -6,7 +6,7 @@ import * as queries from "./Queries";
 import IndexPresenter from "./IndexPresenter";
 import MIndexPresenter from "./mobile/MIndexPresenter";
 
-const IndexContainer = () => {
+const IndexContainer = (props) => {
   const isMobile = useMediaQuery({ maxWidth: 767 });
 
   const history = useHistory();

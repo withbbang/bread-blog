@@ -1,7 +1,8 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useMediaQuery } from "react-responsive";
-import { useMutation } from "@apollo/react-hooks";
+import { useQuery, useMutation } from "@apollo/react-hooks";
 import { useHistory } from "react-router";
+import { withApollo } from "@apollo/client/react/hoc";
 import * as queries from "./Queries";
 import SideBarPresenter from "./SideBarPresenter";
 import MSideBarPresenter from "./mobile/MSideBarPresenter";
@@ -19,6 +20,21 @@ const SideBarContainer = (props) => {
 
   const emailRef = useRef();
   const secretWordRef = useRef();
+
+  const { data, refetch } = useQuery(queries.ME, {
+    fetchPolicy: "cache-and-network",
+    onError: (error) => {
+      setLoading(false);
+      console.log(error);
+    },
+    onCompleted: () => setLoading(false),
+  });
+
+  const logOut = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("refreshToken");
+    props.client.clearStore();
+  };
 
   const [requestLoginMutation] = useMutation(queries.REQUEST_LOGIN, {
     variables: {
@@ -53,9 +69,9 @@ const SideBarContainer = (props) => {
     },
     onCompleted: () => {
       setSecretErr("");
-      setLoading(false);
+      setEmail("");
+      refetch();
       setViewSecretWordModal(false);
-      history.replace("/");
     },
   });
 
@@ -103,6 +119,8 @@ const SideBarContainer = (props) => {
       doConfirmLogin={doConfirmLogin}
       onEmailPress={onEmailPress}
       onSecretWordsPress={onSecretWordsPress}
+      me={data.me}
+      logOut={logOut}
     />
   ) : (
     <SideBarPresenter
@@ -123,8 +141,11 @@ const SideBarContainer = (props) => {
       doConfirmLogin={doConfirmLogin}
       onEmailPress={onEmailPress}
       onSecretWordsPress={onSecretWordsPress}
+      me={data.me}
+      logOut={logOut}
     />
   );
 };
 
-export default SideBarContainer;
+// withApollo는 최상위 index.js에서 ApolloProvider로 전달하는 client를 직접 받아오게 할 수 있다.
+export default withApollo(SideBarContainer);

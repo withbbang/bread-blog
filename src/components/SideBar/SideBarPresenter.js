@@ -10,11 +10,12 @@ import {
   Book,
   Arrow,
   DoubleArrow,
+  LogOut,
 } from "resource/images/SVG";
+import { isLoggedIn } from "module/utils";
 
 const SideBarPresenter = (props) => (
   <>
-    {/* TODO: className join 거는 법 */}
     <div
       className={
         props.sideToggle ? styles.wrap : [styles.wrap, styles.off].join(" ")
@@ -27,17 +28,28 @@ const SideBarPresenter = (props) => (
         >
           <DoubleArrow width="25px" height="25px" fill="#fff" />
         </div>
-        {/* TODO: 리덕스로 교체 */}
-        <div className={styles.user}>
-          <input
-            onChange={(e) => props.setEmail(e.target.value)}
-            onKeyPress={(e) => props.onEmailPress(e)}
-            type="email"
-            placeholder="Email..."
-            ref={props.emailRef}
-          />
-          <button onClick={props.doRequestLogin}>Login</button>
-        </div>
+        {isLoggedIn() && props.me ? (
+          <div className={[styles.user, styles.log_in].join(" ")}>
+            <div className={styles.avatar}>
+              <img src={props.me.avatar} />
+            </div>
+            <div className={styles.infos}>
+              <span>{props.me.name}</span>
+              {props.me.email}
+            </div>
+          </div>
+        ) : (
+          <div className={styles.user}>
+            <input
+              onChange={(e) => props.setEmail(e.target.value)}
+              onKeyPress={(e) => props.onEmailPress(e)}
+              type="email"
+              placeholder="Email..."
+              ref={props.emailRef}
+            />
+            <button onClick={props.doRequestLogin}>Login</button>
+          </div>
+        )}
         <div className={styles.menu}>
           <div className={styles.banner} />
           <div className={styles.svg}>
@@ -78,6 +90,14 @@ const SideBarPresenter = (props) => (
             <Arrow width="25px" height="25px" fill="#fff" />
           </div>
         </div>
+        {isLoggedIn() && (
+          <div className={styles.log_out} onClick={props.logOut}>
+            Log Out
+            <div className={styles.svg}>
+              <LogOut width="20px" height="20px" fill="#fff" />
+            </div>
+          </div>
+        )}
       </div>
     </div>
     <Loader loading={props.loading} />

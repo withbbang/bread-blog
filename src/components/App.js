@@ -115,7 +115,12 @@ const App = (props) => {
           <Route exact path="/join-membership" component={JoinMembership} />
           <Route exact path="/dashboard" component={Dashboard} />
           <Route path="/newPhoto" component={PostPhoto} />
-          <Route path="*" component={({ location }) => <div>"{location.pathname}" not found</div>} />
+          <Route
+            path="*"
+            component={({ location }) => (
+              <div>"{location.pathname}" not found</div>
+            )}
+          />
         </Switch>
       </BrowserRouter>
     </>
