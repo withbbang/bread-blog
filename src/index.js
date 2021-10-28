@@ -24,7 +24,9 @@ const persist_cache = async () =>
 
 persist_cache();
 
-const httpLink = new createUploadLink({ uri: "http://localhost:4000/graphql" });
+const httpLink = new createUploadLink({
+  uri: "https://bread-blog.herokuapp.com/",
+});
 const authLink = setContext((_, { headers }) => {
   const token = localStorage.getItem("token");
   return {
@@ -36,7 +38,7 @@ const authLink = setContext((_, { headers }) => {
 });
 
 const wsLink = new WebSocketLink({
-  uri: "ws://localhost:4000/graphql",
+  uri: "ws://bread-blog.herokuapp.com/",
   options: {
     reconnect: true,
     connectionParams: {
