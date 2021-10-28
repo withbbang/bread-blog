@@ -95,9 +95,7 @@ const App = (props) => {
   return (
     <>
       <Background />
-      <HashRouter
-        basename={"https://withbbang.github.io/graphql-tutorial-client/"}
-      >
+      <HashRouter>
         <Switch>
           <Route exact path="/" component={Index} />
           {/* <Route
