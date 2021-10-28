@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/graphql-tutorial-client/bread-blog/static/css/main.6f344a86.chunk.css",
-    "main.js": "/graphql-tutorial-client/bread-blog/static/js/main.7ce67b9e.chunk.js",
-    "main.js.map": "/graphql-tutorial-client/bread-blog/static/js/main.7ce67b9e.chunk.js.map",
-    "runtime-main.js": "/graphql-tutorial-client/bread-blog/static/js/runtime-main.7c8d9e99.js",
-    "runtime-main.js.map": "/graphql-tutorial-client/bread-blog/static/js/runtime-main.7c8d9e99.js.map",
-    "static/js/2.b964434c.chunk.js": "/graphql-tutorial-client/bread-blog/static/js/2.b964434c.chunk.js",
-    "static/js/2.b964434c.chunk.js.map": "/graphql-tutorial-client/bread-blog/static/js/2.b964434c.chunk.js.map",
-    "index.html": "/graphql-tutorial-client/bread-blog/index.html",
-    "static/css/main.6f344a86.chunk.css.map": "/graphql-tutorial-client/bread-blog/static/css/main.6f344a86.chunk.css.map",
-    "static/js/2.b964434c.chunk.js.LICENSE.txt": "/graphql-tutorial-client/bread-blog/static/js/2.b964434c.chunk.js.LICENSE.txt",
-    "static/media/bread.33e781d8.png": "/graphql-tutorial-client/bread-blog/static/media/bread.33e781d8.png",
-    "static/media/developerImage.107dd214.jpg": "/graphql-tutorial-client/bread-blog/static/media/developerImage.107dd214.jpg",
-    "static/media/developerImage4.2fee7763.jpg": "/graphql-tutorial-client/bread-blog/static/media/developerImage4.2fee7763.jpg",
-    "static/media/instagramColor.62572c86.svg": "/graphql-tutorial-client/bread-blog/static/media/instagramColor.62572c86.svg"
+    "main.css": "/graphql-tutorial-client/static/css/main.6f344a86.chunk.css",
+    "main.js": "/graphql-tutorial-client/static/js/main.7ce67b9e.chunk.js",
+    "main.js.map": "/graphql-tutorial-client/static/js/main.7ce67b9e.chunk.js.map",
+    "runtime-main.js": "/graphql-tutorial-client/static/js/runtime-main.dab64006.js",
+    "runtime-main.js.map": "/graphql-tutorial-client/static/js/runtime-main.dab64006.js.map",
+    "static/js/2.b964434c.chunk.js": "/graphql-tutorial-client/static/js/2.b964434c.chunk.js",
+    "static/js/2.b964434c.chunk.js.map": "/graphql-tutorial-client/static/js/2.b964434c.chunk.js.map",
+    "index.html": "/graphql-tutorial-client/index.html",
+    "static/css/main.6f344a86.chunk.css.map": "/graphql-tutorial-client/static/css/main.6f344a86.chunk.css.map",
+    "static/js/2.b964434c.chunk.js.LICENSE.txt": "/graphql-tutorial-client/static/js/2.b964434c.chunk.js.LICENSE.txt",
+    "static/media/bread.33e781d8.png": "/graphql-tutorial-client/static/media/bread.33e781d8.png",
+    "static/media/developerImage.107dd214.jpg": "/graphql-tutorial-client/static/media/developerImage.107dd214.jpg",
+    "static/media/developerImage4.2fee7763.jpg": "/graphql-tutorial-client/static/media/developerImage4.2fee7763.jpg",
+    "static/media/instagramColor.62572c86.svg": "/graphql-tutorial-client/static/media/instagramColor.62572c86.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.7c8d9e99.js",
+    "static/js/runtime-main.dab64006.js",
     "static/js/2.b964434c.chunk.js",
     "static/css/main.6f344a86.chunk.css",
     "static/js/main.7ce67b9e.chunk.js"
