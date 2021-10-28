@@ -8,9 +8,10 @@ import { Github, Instagram, GithubReverse } from "resource/images/SVG";
 const MindexPresenter = (props) => (
   <div className={styles.wrap}>
     <Header />
-    <div className={styles.first_section} />
-    <div className={styles.second_section}>
+    <div className={styles.first_section}>
       <img src={developerImage} />
+    </div>
+    <div className={styles.second_section}>
       <h2>Bread's Blog of Develop</h2>
       <h3>Seoul, Korea raised.</h3>
       <h3>Web Developer.</h3>
