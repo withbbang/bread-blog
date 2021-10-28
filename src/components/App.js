@@ -95,7 +95,9 @@ const App = (props) => {
   return (
     <>
       <Background />
-      <BrowserRouter>
+      <BrowserRouter
+        basename={"https://withbbang.github.io/graphql-tutorial-client/"}
+      >
         <Switch>
           <Route exact path="/" component={Index} />
           {/* <Route
