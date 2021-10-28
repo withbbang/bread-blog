@@ -1,5 +1,5 @@
 import React, { Fragment, useState, useEffect } from "react";
-import { HashRouter, Switch, Route, Redirect } from "react-router-dom";
+import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import { useQuery, useMutation } from "@apollo/react-hooks";
 import { NetworkStatus, useSubscription } from "@apollo/client";
 import { gql } from "graphql-tag";
@@ -95,7 +95,7 @@ const App = (props) => {
   return (
     <>
       <Background />
-      <HashRouter>
+      <BrowserRouter basename={process.env.PUBLIC_URL}>
         <Switch>
           <Route exact path="/" component={Index} />
           {/* <Route
@@ -122,7 +122,7 @@ const App = (props) => {
             )}
           />
         </Switch>
-      </HashRouter>
+      </BrowserRouter>
     </>
   );
 };
