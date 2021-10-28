@@ -1,5 +1,5 @@
 import React, { Fragment, useState, useEffect } from "react";
-import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
+import { HashRouter, Switch, Route, Redirect } from "react-router-dom";
 import { useQuery, useMutation } from "@apollo/react-hooks";
 import { NetworkStatus, useSubscription } from "@apollo/client";
 import { gql } from "graphql-tag";
@@ -95,7 +95,7 @@ const App = (props) => {
   return (
     <>
       <Background />
-      <BrowserRouter
+      <HashRouter
         basename={"https://withbbang.github.io/graphql-tutorial-client/"}
       >
         <Switch>
@@ -124,7 +124,7 @@ const App = (props) => {
             )}
           />
         </Switch>
-      </BrowserRouter>
+      </HashRouter>
     </>
   );
 };
