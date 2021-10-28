@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/graphql-tutorial-client/static/css/main.6f344a86.chunk.css",
+    "main.css": "/graphql-tutorial-client/static/css/main.7aa44d7d.chunk.css",
     "main.js": "/graphql-tutorial-client/static/js/main.7ce67b9e.chunk.js",
     "main.js.map": "/graphql-tutorial-client/static/js/main.7ce67b9e.chunk.js.map",
     "runtime-main.js": "/graphql-tutorial-client/static/js/runtime-main.dab64006.js",
@@ -8,7 +8,7 @@
     "static/js/2.b964434c.chunk.js": "/graphql-tutorial-client/static/js/2.b964434c.chunk.js",
     "static/js/2.b964434c.chunk.js.map": "/graphql-tutorial-client/static/js/2.b964434c.chunk.js.map",
     "index.html": "/graphql-tutorial-client/index.html",
-    "static/css/main.6f344a86.chunk.css.map": "/graphql-tutorial-client/static/css/main.6f344a86.chunk.css.map",
+    "static/css/main.7aa44d7d.chunk.css.map": "/graphql-tutorial-client/static/css/main.7aa44d7d.chunk.css.map",
     "static/js/2.b964434c.chunk.js.LICENSE.txt": "/graphql-tutorial-client/static/js/2.b964434c.chunk.js.LICENSE.txt",
     "static/media/bread.33e781d8.png": "/graphql-tutorial-client/static/media/bread.33e781d8.png",
     "static/media/developerImage.107dd214.jpg": "/graphql-tutorial-client/static/media/developerImage.107dd214.jpg",
@@ -18,7 +18,7 @@
   "entrypoints": [
     "static/js/runtime-main.dab64006.js",
     "static/js/2.b964434c.chunk.js",
-    "static/css/main.6f344a86.chunk.css",
+    "static/css/main.7aa44d7d.chunk.css",
     "static/js/main.7ce67b9e.chunk.js"
   ]
 }
