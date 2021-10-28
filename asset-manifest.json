@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/graphql-tutorial-client/static/css/main.7aa44d7d.chunk.css",
-    "main.js": "/graphql-tutorial-client/static/js/main.60f742f4.chunk.js",
-    "main.js.map": "/graphql-tutorial-client/static/js/main.60f742f4.chunk.js.map",
+    "main.js": "/graphql-tutorial-client/static/js/main.0567153f.chunk.js",
+    "main.js.map": "/graphql-tutorial-client/static/js/main.0567153f.chunk.js.map",
     "runtime-main.js": "/graphql-tutorial-client/static/js/runtime-main.dab64006.js",
     "runtime-main.js.map": "/graphql-tutorial-client/static/js/runtime-main.dab64006.js.map",
-    "static/js/2.b964434c.chunk.js": "/graphql-tutorial-client/static/js/2.b964434c.chunk.js",
-    "static/js/2.b964434c.chunk.js.map": "/graphql-tutorial-client/static/js/2.b964434c.chunk.js.map",
+    "static/js/2.ce23c220.chunk.js": "/graphql-tutorial-client/static/js/2.ce23c220.chunk.js",
+    "static/js/2.ce23c220.chunk.js.map": "/graphql-tutorial-client/static/js/2.ce23c220.chunk.js.map",
     "index.html": "/graphql-tutorial-client/index.html",
     "static/css/main.7aa44d7d.chunk.css.map": "/graphql-tutorial-client/static/css/main.7aa44d7d.chunk.css.map",
-    "static/js/2.b964434c.chunk.js.LICENSE.txt": "/graphql-tutorial-client/static/js/2.b964434c.chunk.js.LICENSE.txt",
+    "static/js/2.ce23c220.chunk.js.LICENSE.txt": "/graphql-tutorial-client/static/js/2.ce23c220.chunk.js.LICENSE.txt",
     "static/media/bread.33e781d8.png": "/graphql-tutorial-client/static/media/bread.33e781d8.png",
     "static/media/developerImage.107dd214.jpg": "/graphql-tutorial-client/static/media/developerImage.107dd214.jpg",
     "static/media/developerImage4.2fee7763.jpg": "/graphql-tutorial-client/static/media/developerImage4.2fee7763.jpg",
@@ -17,8 +17,8 @@
   },
   "entrypoints": [
     "static/js/runtime-main.dab64006.js",
-    "static/js/2.b964434c.chunk.js",
+    "static/js/2.ce23c220.chunk.js",
     "static/css/main.7aa44d7d.chunk.css",
-    "static/js/main.60f742f4.chunk.js"
+    "static/js/main.0567153f.chunk.js"
   ]
 }
