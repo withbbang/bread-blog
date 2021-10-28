@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/bread-blog/static/css/main.013f9067.chunk.css",
-    "main.js": "/bread-blog/static/js/main.187ac1aa.chunk.js",
-    "main.js.map": "/bread-blog/static/js/main.187ac1aa.chunk.js.map",
+    "main.css": "/bread-blog/static/css/main.f1b5732e.chunk.css",
+    "main.js": "/bread-blog/static/js/main.a3b8b24a.chunk.js",
+    "main.js.map": "/bread-blog/static/js/main.a3b8b24a.chunk.js.map",
     "runtime-main.js": "/bread-blog/static/js/runtime-main.357322d3.js",
     "runtime-main.js.map": "/bread-blog/static/js/runtime-main.357322d3.js.map",
-    "static/js/2.b964434c.chunk.js": "/bread-blog/static/js/2.b964434c.chunk.js",
-    "static/js/2.b964434c.chunk.js.map": "/bread-blog/static/js/2.b964434c.chunk.js.map",
+    "static/js/2.7c264791.chunk.js": "/bread-blog/static/js/2.7c264791.chunk.js",
+    "static/js/2.7c264791.chunk.js.map": "/bread-blog/static/js/2.7c264791.chunk.js.map",
     "index.html": "/bread-blog/index.html",
-    "static/css/main.013f9067.chunk.css.map": "/bread-blog/static/css/main.013f9067.chunk.css.map",
-    "static/js/2.b964434c.chunk.js.LICENSE.txt": "/bread-blog/static/js/2.b964434c.chunk.js.LICENSE.txt",
+    "static/css/main.f1b5732e.chunk.css.map": "/bread-blog/static/css/main.f1b5732e.chunk.css.map",
+    "static/js/2.7c264791.chunk.js.LICENSE.txt": "/bread-blog/static/js/2.7c264791.chunk.js.LICENSE.txt",
     "static/media/bread.33e781d8.png": "/bread-blog/static/media/bread.33e781d8.png",
     "static/media/developerImage.107dd214.jpg": "/bread-blog/static/media/developerImage.107dd214.jpg",
     "static/media/developerImage4.2fee7763.jpg": "/bread-blog/static/media/developerImage4.2fee7763.jpg",
@@ -17,8 +17,8 @@
   },
   "entrypoints": [
     "static/js/runtime-main.357322d3.js",
-    "static/js/2.b964434c.chunk.js",
-    "static/css/main.013f9067.chunk.css",
-    "static/js/main.187ac1aa.chunk.js"
+    "static/js/2.7c264791.chunk.js",
+    "static/css/main.f1b5732e.chunk.css",
+    "static/js/main.a3b8b24a.chunk.js"
   ]
 }
