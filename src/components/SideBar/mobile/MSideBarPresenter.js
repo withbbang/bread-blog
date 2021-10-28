@@ -36,13 +36,13 @@ const MSideBarPresenter = (props) => (
         >
           <DoubleArrow width="25px" height="25px" fill="#fff" />
         </div>
-        {isLoggedIn() && props.me ? (
+        {isLoggedIn() && props.data.me ? (
           <div className={[styles.user, styles.log_in].join(" ")}>
             <div className={styles.avatar}>
-              <img src={props.me.avatar} />
+              <img src={props.data.me.avatar} />
             </div>
             <div className={styles.infos}>
-              <span>{props.me.name}</span>
+              <span>{props.data.me.name}</span>
             </div>
           </div>
         ) : (

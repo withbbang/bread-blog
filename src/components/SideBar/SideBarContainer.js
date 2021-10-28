@@ -119,7 +119,7 @@ const SideBarContainer = (props) => {
       doConfirmLogin={doConfirmLogin}
       onEmailPress={onEmailPress}
       onSecretWordsPress={onSecretWordsPress}
-      me={data.me}
+      data={data}
       logOut={logOut}
     />
   ) : (
@@ -141,7 +141,7 @@ const SideBarContainer = (props) => {
       doConfirmLogin={doConfirmLogin}
       onEmailPress={onEmailPress}
       onSecretWordsPress={onSecretWordsPress}
-      me={data.me}
+      data={data}
       logOut={logOut}
     />
   );
