@@ -15,12 +15,19 @@ const MindexPresenter = (props) => (
       <h3>Seoul, Korea raised.</h3>
       <h3>Web Developer.</h3>
       <div className={styles.links}>
-        <div className={styles.link} onClick={() => window.open("https://github.com/withbbang")}>
+        <div
+          className={styles.link}
+          onClick={() => window.open("https://github.com/withbbang")}
+        >
           <Github /> GitHub
         </div>
         <div
           className={styles.link}
-          onClick={() => window.open("https://www.instagram.com/cheeseonionbbangnigasajunbbang/")}
+          onClick={() =>
+            window.open(
+              "https://www.instagram.com/cheeseonionbbangnigasajunbbang/"
+            )
+          }
         >
           <img src={instagramColor} /> Instagram
         </div>
