@@ -43,36 +43,11 @@ const LISTEN_FOR_USERS = gql`
   }
 `;
 
-const TEST_QUERY = gql`
-  query {
-    test
-  }
-`;
-
 const TEST_SUBSCRIPTION = gql`
   subscription {
     test
   }
 `;
-
-let count = 0;
-
-const TestSubscription = () => {
-  const { loading, error, data } = useSubscription(TEST_SUBSCRIPTION);
-
-  const resetValue = (e) => {
-    e.target.value = count = 0;
-  };
-
-  count++;
-
-  if (loading) return <input id="test" />;
-  if (error) return alert(error.message);
-
-  if (data.test) {
-    return <input id="test" value={count} onClick={(e) => resetValue(e)} />;
-  }
-};
 
 const App = (props) => {
   const [fetchTest, setFetchTest] = useState(false);
