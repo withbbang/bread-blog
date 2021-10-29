@@ -76,7 +76,9 @@ const TestSubscription = () => {
 
 const App = (props) => {
   const [fetchTest, setFetchTest] = useState(false);
+  const { data } = useSubscription(TEST_SUBSCRIPTION);
 
+  if (data) console.log("subscribtion data: ", data.test);
   // useEffect(() => {
   //   let { client } = this.props;
   //   this.listenForUsers = client
