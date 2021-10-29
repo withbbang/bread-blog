@@ -38,7 +38,7 @@ const authLink = setContext((_, { headers }) => {
 });
 
 const wsLink = new WebSocketLink({
-  uri: "ws://bread-blog.herokuapp.com/",
+  uri: "wss://bread-blog.herokuapp.com/",
   options: {
     reconnect: true,
     connectionParams: {
