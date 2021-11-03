@@ -34,33 +34,14 @@ export const ROOT_QUERY = gql`
   }
 `;
 
-const LISTEN_FOR_USERS = gql`
-  subscription {
-    newUser {
-      githubLogin
-      name
-      avatar
-    }
-  }
-`;
-
-const TEST_SUBSCRIPTION = gql`
-  subscription {
-    test
-  }
-`;
-
 const App = (props) => {
   const [cookies, setCookie, removeCookie] = useCookies([]);
   const [fetchTest, setFetchTest] = useState(false);
-  const { data } = useSubscription(TEST_SUBSCRIPTION);
 
   // 방문자 수 계산용
   useEffect(() => {
     let lastVisit = cookies.lastVisit;
     let now = new Date();
-    let tomorrow = new Date();
-    tomorrow.setDate(tomorrow.getDate() + 1);
 
     if (!lastVisit) {
       setCookie("visitCount", "Y");
@@ -76,12 +57,12 @@ const App = (props) => {
       setCookie("visitCount", "Y");
       setCookie("lastVisit", now);
       // 서버에 visitCount 올리는 mutation
-    } else {
-      setCookie("lastVisit", now);
+      return;
     }
+
+    setCookie("lastVisit", now);
   }, []);
 
-  if (data) console.log("subscribtion data: ", data.test);
   // useEffect(() => {
   //   let { client } = this.props;
   //   this.listenForUsers = client
