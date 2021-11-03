@@ -13,6 +13,7 @@ import { WebSocketLink } from "@apollo/client/link/ws";
 import { getMainDefinition } from "@apollo/client/utilities";
 import { persistCache } from "apollo-cache-persist";
 import { createUploadLink } from "apollo-upload-client";
+import { CookiesProvider } from "react-cookie";
 
 const cache = new InMemoryCache();
 
@@ -29,6 +30,7 @@ const httpLink = new createUploadLink({
     process.env.NODE_ENV === "development"
       ? "http://localhost:4000/graphql"
       : "https://bread-blog.herokuapp.com/graphql",
+  credentials: "include",
 });
 const authLink = setContext((_, { headers }) => {
   const token = localStorage.getItem("token");
@@ -76,7 +78,9 @@ const client = new ApolloClient({
 
 render(
   <ApolloProvider client={client}>
-    <App />
+    <CookiesProvider>
+      <App />
+    </CookiesProvider>
   </ApolloProvider>,
   document.getElementById("root"),
 );

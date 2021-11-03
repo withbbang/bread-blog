@@ -3,6 +3,7 @@ import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import { useQuery, useMutation } from "@apollo/react-hooks";
 import { NetworkStatus, useSubscription } from "@apollo/client";
 import { gql } from "graphql-tag";
+import { useCookies } from "react-cookie";
 import Background from "components/Background";
 import Index from "components/Index";
 import JoinMembership from "components/JoinMembership";
@@ -50,8 +51,16 @@ const TEST_SUBSCRIPTION = gql`
 `;
 
 const App = (props) => {
+  const [cookies, setCookie, removeCookie] = useCookies(["rememberText"]);
   const [fetchTest, setFetchTest] = useState(false);
   const { data } = useSubscription(TEST_SUBSCRIPTION);
+
+  useEffect(() => {
+    console.log(cookies);
+    let date = new Date();
+    date.setDate(date.getDate() + 1);
+    setCookie("todayVisit", "Y", { expires: date });
+  }, []);
 
   if (data) console.log("subscribtion data: ", data.test);
   // useEffect(() => {
