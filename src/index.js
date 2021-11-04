@@ -29,7 +29,7 @@ const httpLink = new createUploadLink({
   uri:
     process.env.NODE_ENV === "development"
       ? "http://localhost:4000/graphql"
-      : "https://bread-blog.herokuapp.com",
+      : "https://bread-blog.herokuapp.com/graphql",
   credentials: "include", // cors 통신 할 때 쿠키가 전달될 수 있도록 하기 위한 인자값
 });
 const authLink = setContext((_, { headers }) => {
