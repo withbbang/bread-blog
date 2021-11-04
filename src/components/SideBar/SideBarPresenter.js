@@ -24,10 +24,16 @@ const SideBarPresenter = (props) => (
       <div className={styles.inner_wrap}>
         <div className={styles.visitor_count}>
           <div className={styles.visitor}>
-            Total {props.getVisitor ? props.getVisitor.totalCount : 0}
+            Total{" "}
+            {props.visitorData.getVisitor
+              ? props.visitorData.getVisitor.totalCount
+              : 0}
           </div>
           <div className={styles.visitor}>
-            Today {props.getVisitor ? props.getVisitor.todayCount : 0}
+            Today{" "}
+            {props.visitorData.getVisitor
+              ? props.visitorData.getVisitor.todayCount
+              : 0}
           </div>
           <div
             className={styles.close}
@@ -36,14 +42,14 @@ const SideBarPresenter = (props) => (
             <DoubleArrow width="25px" height="25px" fill="#fff" />
           </div>
         </div>
-        {isLoggedIn() && props.me ? (
+        {isLoggedIn() && props.meData.me ? (
           <div className={[styles.user, styles.log_in].join(" ")}>
             <div className={styles.avatar}>
-              <img src={props.me.avatar} />
+              <img src={props.meData.me.avatar} />
             </div>
             <div className={styles.infos}>
-              <span>{props.me.name}</span>
-              {props.me.email}
+              <span>{props.meData.me.name}</span>
+              {props.meData.me.email}
             </div>
           </div>
         ) : (

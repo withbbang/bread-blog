@@ -7,8 +7,6 @@ import Background from "components/Background";
 import Index from "components/Index";
 import JoinMembership from "components/JoinMembership";
 import Dashboard from "components/Dashboard";
-import Loader from "components/Loader/Loader";
-import ErrorModal from "components/ErrorModal/ErrorModal";
 import Users from "components/Users/Users";
 import Photos from "components/Photos/Photos";
 import PostPhoto from "components/PostPhoto/PostPhoto";
@@ -30,21 +28,6 @@ export const ROOT_QUERY = gql`
       url
       name
     }
-  }
-`;
-
-const GET_VISITOR = gql`
-  query getVisitor {
-    getVisitor {
-      totalCount
-      todayCount
-    }
-  }
-`;
-
-const SET_VISITOR = gql`
-  mutation setVisitor {
-    setVisitor
   }
 `;
 

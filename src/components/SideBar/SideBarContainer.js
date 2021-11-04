@@ -51,10 +51,7 @@ const SideBarContainer = (props) => {
     }
   }, []);
 
-  const {
-    data: { me },
-    refetch: meRefetch,
-  } = useQuery(queries.ME, {
+  const { data: meData, refetch: meRefetch } = useQuery(queries.ME, {
     fetchPolicy: "cache-and-network",
     onError: (error) => {
       setLoading(false);
@@ -63,20 +60,20 @@ const SideBarContainer = (props) => {
     onCompleted: () => setLoading(false),
   });
 
-  const {
-    data: { getVisitor },
-    refetch: visitorRefetch,
-  } = useQuery(queries.GET_VISITOR, {
-    fetchPolicy: "cache-and-network",
-    onError: (error) => {
-      setLoading(false);
-      setErr(error);
+  const { data: visitorData, refetch: visitorRefetch } = useQuery(
+    queries.GET_VISITOR,
+    {
+      fetchPolicy: "cache-and-network",
+      onError: (error) => {
+        setLoading(false);
+        setErr(error);
+      },
+      onCompleted: (data) => {
+        setErr("");
+        setLoading(false);
+      },
     },
-    onCompleted: (data) => {
-      setErr("");
-      setLoading(false);
-    },
-  });
+  );
 
   const [setVisitorMutation] = useMutation(queries.SET_VISITOR, {
     update(cache, { data }) {
@@ -183,8 +180,8 @@ const SideBarContainer = (props) => {
       doConfirmLogin={doConfirmLogin}
       onEmailPress={onEmailPress}
       onSecretWordsPress={onSecretWordsPress}
-      me={me}
-      getVisitor={getVisitor}
+      meData={meData}
+      visitorData={visitorData}
       logOut={logOut}
     />
   ) : (
@@ -206,8 +203,8 @@ const SideBarContainer = (props) => {
       doConfirmLogin={doConfirmLogin}
       onEmailPress={onEmailPress}
       onSecretWordsPress={onSecretWordsPress}
-      me={me}
-      getVisitor={getVisitor}
+      meData={meData}
+      visitorData={visitorData}
       logOut={logOut}
     />
   );
