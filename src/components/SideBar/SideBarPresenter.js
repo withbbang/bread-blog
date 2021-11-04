@@ -22,20 +22,28 @@ const SideBarPresenter = (props) => (
       }
     >
       <div className={styles.inner_wrap}>
-        <div
-          className={styles.close}
-          onClick={() => props.setSideToggle(!props.sideToggle)}
-        >
-          <DoubleArrow width="25px" height="25px" fill="#fff" />
+        <div className={styles.visitor_count}>
+          <div className={styles.visitor}>
+            Total {props.getVisitor ? props.getVisitor.totalCount : 0}
+          </div>
+          <div className={styles.visitor}>
+            Today {props.getVisitor ? props.getVisitor.todayCount : 0}
+          </div>
+          <div
+            className={styles.close}
+            onClick={() => props.setSideToggle(!props.sideToggle)}
+          >
+            <DoubleArrow width="25px" height="25px" fill="#fff" />
+          </div>
         </div>
-        {isLoggedIn() && props.data.me ? (
+        {isLoggedIn() && props.me ? (
           <div className={[styles.user, styles.log_in].join(" ")}>
             <div className={styles.avatar}>
-              <img src={props.data.me.avatar} />
+              <img src={props.me.avatar} />
             </div>
             <div className={styles.infos}>
-              <span>{props.data.me.name}</span>
-              {props.data.me.email}
+              <span>{props.me.name}</span>
+              {props.me.email}
             </div>
           </div>
         ) : (
@@ -112,9 +120,7 @@ const SideBarPresenter = (props) => (
         secretErr={props.secretErr}
       />
     )}
-    {props.emailErr && (
-      <ErrorModal setErr={props.setEmailErr} err={props.emailErr} />
-    )}
+    {props.emailErr && <ErrorModal setErr={props.setErr} err={props.err} />}
   </>
 );
 

@@ -3,11 +3,12 @@ import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import { useQuery, useMutation } from "@apollo/react-hooks";
 import { NetworkStatus, useSubscription } from "@apollo/client";
 import { gql } from "graphql-tag";
-import { useCookies } from "react-cookie";
 import Background from "components/Background";
 import Index from "components/Index";
 import JoinMembership from "components/JoinMembership";
 import Dashboard from "components/Dashboard";
+import Loader from "components/Loader/Loader";
+import ErrorModal from "components/ErrorModal/ErrorModal";
 import Users from "components/Users/Users";
 import Photos from "components/Photos/Photos";
 import PostPhoto from "components/PostPhoto/PostPhoto";
@@ -18,8 +19,6 @@ import TestRequestBtn from "./TestRequestComponent/TestRequestComponent";
 export const ROOT_QUERY = gql`
   ${USER_INFO}
   query allUsers {
-    totalUsers
-    totalPhotos
     allUsers {
       ...userInfo
     }
@@ -34,34 +33,23 @@ export const ROOT_QUERY = gql`
   }
 `;
 
+const GET_VISITOR = gql`
+  query getVisitor {
+    getVisitor {
+      totalCount
+      todayCount
+    }
+  }
+`;
+
+const SET_VISITOR = gql`
+  mutation setVisitor {
+    setVisitor
+  }
+`;
+
 const App = (props) => {
-  const [cookies, setCookie, removeCookie] = useCookies([]);
   const [fetchTest, setFetchTest] = useState(false);
-
-  // 방문자 수 계산용
-  useEffect(() => {
-    let lastVisit = cookies.lastVisit;
-    let now = new Date();
-
-    if (!lastVisit) {
-      setCookie("visitCount", "Y");
-      setCookie("lastVisit", now);
-      // 서버에 visitCount 올리는 mutation
-      return;
-    }
-
-    lastVisit = new Date(lastVisit);
-    const diff = now.getDate() - lastVisit.getDate();
-
-    if (diff > 0) {
-      setCookie("visitCount", "Y");
-      setCookie("lastVisit", now);
-      // 서버에 visitCount 올리는 mutation
-      return;
-    }
-
-    setCookie("lastVisit", now);
-  }, []);
 
   // useEffect(() => {
   //   let { client } = this.props;
@@ -100,7 +88,7 @@ const App = (props) => {
         /> */}
           <Route exact path="/join-membership" component={JoinMembership} />
           <Route exact path="/dashboard" component={Dashboard} />
-          <Route path="/newPhoto" component={PostPhoto} />
+          {/* <Route path="/newPhoto" component={PostPhoto} /> */}
           <Route
             path="*"
             component={({ location }) => (

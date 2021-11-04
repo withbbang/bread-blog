@@ -30,18 +30,22 @@
     flex-direction: column;
     box-sizing: border-box;
 
-    .close {
-      position: fixed;
-      box-sizing: border-box;
-      margin-right: 15px;
-      height: fit-content;
-      width: fit-content;
-      top: 10px;
-      right: 0px;
-      cursor: pointer;
+    .visitor_count {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: #fff;
+      padding: 15px 15px 0 15px;
 
-      > svg {
-        transform: rotate(180deg);
+      .close {
+        box-sizing: border-box;
+        height: fit-content;
+        width: fit-content;
+        cursor: pointer;
+
+        > svg {
+          transform: rotate(180deg);
+        }
       }
     }
 

@@ -4,6 +4,7 @@ import { useQuery, useMutation } from "@apollo/react-hooks";
 import { useHistory } from "react-router";
 import { withApollo } from "@apollo/client/react/hoc";
 import * as queries from "./Queries";
+import { useCookies } from "react-cookie";
 import SideBarPresenter from "./SideBarPresenter";
 import MSideBarPresenter from "./mobile/MSideBarPresenter";
 
@@ -14,20 +15,83 @@ const SideBarContainer = (props) => {
   const [email, setEmail] = useState("");
   const [secretWord, setSecretWord] = useState("");
   const [loading, setLoading] = useState(false);
-  const [emailErr, setEmailErr] = useState("");
+  const [err, setErr] = useState("");
   const [secretErr, setSecretErr] = useState("");
   const [viewSecretWordModal, setViewSecretWordModal] = useState(false);
+  const [cookies, setCookie, removeCookie] = useCookies([]);
 
   const emailRef = useRef();
   const secretWordRef = useRef();
 
-  const { data, refetch } = useQuery(queries.ME, {
+  // 방문자 수 계산용
+  useEffect(() => {
+    if (process.env.NODE_ENV !== "development") {
+      let lastVisit = cookies.lastVisit;
+      let now = new Date();
+
+      if (!lastVisit) {
+        setCookie("visitCount", "Y");
+        setCookie("lastVisit", now);
+        setVisitorMutation();
+        return;
+      }
+
+      lastVisit = new Date(lastVisit);
+      const diff = now.getDate() - lastVisit.getDate();
+
+      if (diff > 0) {
+        setCookie("visitCount", "Y");
+        setCookie("lastVisit", now);
+        setVisitorMutation();
+        return;
+      }
+
+      setCookie("visitCount", "N");
+      setCookie("lastVisit", now);
+    }
+  }, []);
+
+  const {
+    data: { me },
+    refetch: meRefetch,
+  } = useQuery(queries.ME, {
     fetchPolicy: "cache-and-network",
     onError: (error) => {
       setLoading(false);
       console.log(error);
     },
     onCompleted: () => setLoading(false),
+  });
+
+  const {
+    data: { getVisitor },
+    refetch: visitorRefetch,
+  } = useQuery(queries.GET_VISITOR, {
+    fetchPolicy: "cache-and-network",
+    onError: (error) => {
+      setLoading(false);
+      setErr(error);
+    },
+    onCompleted: (data) => {
+      setErr("");
+      setLoading(false);
+    },
+  });
+
+  const [setVisitorMutation] = useMutation(queries.SET_VISITOR, {
+    update(cache, { data }) {
+      //TODO: 캐시로 방문자 수 조작해보기
+    },
+    onError: (error) => {
+      setErr(error);
+      setLoading(false);
+    },
+    onCompleted: (data) => {
+      setErr("");
+      //TODO: 캐시로 방문자 수 조작하기 성공하면 refetch 제거
+      visitorRefetch();
+      setLoading(false);
+    },
   });
 
   const logOut = () => {
@@ -41,11 +105,11 @@ const SideBarContainer = (props) => {
       email,
     },
     onError: (error) => {
-      setEmailErr(error.message);
+      setErr(error.message);
       setLoading(false);
     },
     onCompleted: () => {
-      setEmailErr("");
+      setErr("");
       setViewSecretWordModal(true);
       secretWordRef.current.focus();
       setLoading(false);
@@ -70,7 +134,7 @@ const SideBarContainer = (props) => {
     onCompleted: () => {
       setSecretErr("");
       setEmail("");
-      refetch();
+      meRefetch();
       setViewSecretWordModal(false);
     },
   });
@@ -79,7 +143,7 @@ const SideBarContainer = (props) => {
     if (email !== "") {
       setLoading(true);
       requestLoginMutation();
-    } else setEmailErr("Do not empty email field");
+    } else setErr("Do not empty email field");
   };
 
   const doConfirmLogin = (id) => {
@@ -108,8 +172,8 @@ const SideBarContainer = (props) => {
       secretWord={secretWord}
       setSecretWord={setSecretWord}
       loading={loading}
-      emailErr={emailErr}
-      setEmailErr={setEmailErr}
+      err={err}
+      setErr={setErr}
       secretErr={secretErr}
       viewSecretWordModal={viewSecretWordModal}
       setViewSecretWordModal={setViewSecretWordModal}
@@ -119,7 +183,8 @@ const SideBarContainer = (props) => {
       doConfirmLogin={doConfirmLogin}
       onEmailPress={onEmailPress}
       onSecretWordsPress={onSecretWordsPress}
-      data={data}
+      me={me}
+      getVisitor={getVisitor}
       logOut={logOut}
     />
   ) : (
@@ -130,8 +195,8 @@ const SideBarContainer = (props) => {
       secretWord={secretWord}
       setSecretWord={setSecretWord}
       loading={loading}
-      emailErr={emailErr}
-      setEmailErr={setEmailErr}
+      err={err}
+      setErr={setErr}
       secretErr={secretErr}
       viewSecretWordModal={viewSecretWordModal}
       setViewSecretWordModal={setViewSecretWordModal}
@@ -141,7 +206,8 @@ const SideBarContainer = (props) => {
       doConfirmLogin={doConfirmLogin}
       onEmailPress={onEmailPress}
       onSecretWordsPress={onSecretWordsPress}
-      data={data}
+      me={me}
+      getVisitor={getVisitor}
       logOut={logOut}
     />
   );

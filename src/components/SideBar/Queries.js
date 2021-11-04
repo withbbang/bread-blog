@@ -28,3 +28,18 @@ export const ME = gql`
     }
   }
 `;
+
+export const GET_VISITOR = gql`
+  query getVisitor {
+    getVisitor {
+      totalCount
+      todayCount
+    }
+  }
+`;
+
+export const SET_VISITOR = gql`
+  mutation setVisitor {
+    setVisitor
+  }
+`;
