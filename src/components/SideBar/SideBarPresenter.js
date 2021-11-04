@@ -38,7 +38,7 @@ const SideBarPresenter = (props) => (
             <DoubleArrow width="25px" height="25px" fill="#fff" />
           </div>
         </div>
-        {isLoggedIn() && props.meData.me ? (
+        {isLoggedIn() && props.meData ? (
           <div className={[styles.user, styles.log_in].join(" ")}>
             <div className={styles.avatar}>
               <img src={props.meData.me.avatar} />
