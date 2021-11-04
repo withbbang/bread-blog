@@ -74,7 +74,6 @@ if (localStorage["apollo-cache-persist"]) {
 const client = new ApolloClient({
   cache,
   link,
-  credentials: "include",
 });
 
 render(
