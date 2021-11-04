@@ -33,15 +33,11 @@ const MSideBarPresenter = (props) => (
         <div className={styles.visitor_count}>
           <div className={styles.visitor}>
             Total{" "}
-            {props.visitorData.getVisitor
-              ? props.visitorData.getVisitor.totalCount
-              : 0}
+            {props.visitorData ? props.visitorData.getVisitor.totalCount : 0}
           </div>
           <div className={styles.visitor}>
             Today{" "}
-            {props.visitorData.getVisitor
-              ? props.visitorData.getVisitor.todayCount
-              : 0}
+            {props.visitorData ? props.visitorData.getVisitor.todayCount : 0}
           </div>
           <div
             className={styles.close}
