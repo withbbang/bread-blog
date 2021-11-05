@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/bread-blog/static/css/main.58f081ea.chunk.css",
-    "main.js": "/bread-blog/static/js/main.7824430f.chunk.js",
-    "main.js.map": "/bread-blog/static/js/main.7824430f.chunk.js.map",
+    "main.js": "/bread-blog/static/js/main.c29b3a60.chunk.js",
+    "main.js.map": "/bread-blog/static/js/main.c29b3a60.chunk.js.map",
     "runtime-main.js": "/bread-blog/static/js/runtime-main.357322d3.js",
     "runtime-main.js.map": "/bread-blog/static/js/runtime-main.357322d3.js.map",
     "static/js/2.39696d6b.chunk.js": "/bread-blog/static/js/2.39696d6b.chunk.js",
@@ -19,6 +19,6 @@
     "static/js/runtime-main.357322d3.js",
     "static/js/2.39696d6b.chunk.js",
     "static/css/main.58f081ea.chunk.css",
-    "static/js/main.7824430f.chunk.js"
+    "static/js/main.c29b3a60.chunk.js"
   ]
 }
