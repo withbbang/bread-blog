@@ -25,30 +25,30 @@ const SideBarContainer = (props) => {
 
   // 방문자 수 계산용
   useEffect(() => {
-    if (process.env.NODE_ENV !== "development") {
-      let lastVisit = cookies.lastVisit;
-      let now = new Date();
+    // if (process.env.NODE_ENV !== "development") {
+    let lastVisit = cookies.lastVisit;
+    let now = new Date();
 
-      if (!lastVisit) {
-        setCookie("visitCount", "Y");
-        setCookie("lastVisit", now);
-        setVisitorMutation();
-        return;
-      }
-
-      lastVisit = new Date(lastVisit);
-      const diff = now.getDate() - lastVisit.getDate();
-
-      if (diff > 0) {
-        setCookie("visitCount", "Y");
-        setCookie("lastVisit", now);
-        setVisitorMutation();
-        return;
-      }
-
-      setCookie("visitCount", "N");
+    if (!lastVisit) {
+      setCookie("visitCount", "Y");
       setCookie("lastVisit", now);
+      setVisitorMutation();
+      return;
     }
+
+    lastVisit = new Date(lastVisit);
+    const diff = now.getDate() - lastVisit.getDate();
+
+    if (diff > 0) {
+      setCookie("visitCount", "Y");
+      setCookie("lastVisit", now);
+      setVisitorMutation();
+      return;
+    }
+
+    removeCookie("visitCount");
+    setCookie("lastVisit", now);
+    // }
   }, []);
 
   const { data: meData, refetch: meRefetch } = useQuery(queries.ME, {

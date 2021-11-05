@@ -38,6 +38,7 @@ const authLink = setContext((_, { headers }) => {
     headers: {
       ...headers,
       authorization: token,
+      cookie: document.cookie,
     },
   };
 });
