@@ -31,9 +31,6 @@ const httpLink = new createUploadLink({
       ? "http://localhost:4000/graphql"
       : "https://bread-blog.herokuapp.com/graphql",
   credentials: "include", // cors 통신 할 때 쿠키가 전달될 수 있도록 하기 위한 인자값
-  fetchOptions: {
-    credentials: "include",
-  },
 });
 const authLink = setContext((_, { headers }) => {
   const token = localStorage.getItem("token");
