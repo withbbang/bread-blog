@@ -74,7 +74,13 @@ if (localStorage["apollo-cache-persist"]) {
 const client = new ApolloClient({
   cache,
   link,
-  credentials: "include",
+  request: async (operation) => {
+    operation.setContext({
+      fetchOptions: {
+        credentials: "include",
+      },
+    });
+  },
 });
 
 render(
